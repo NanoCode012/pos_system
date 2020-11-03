@@ -13,6 +13,7 @@
       <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
       <!-- Argon CSS -->
       <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+      <!-- Custom CSS -->
       <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
     </head>
 
@@ -70,28 +71,13 @@
                           <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                         </div>
                         <select class="form-control create-acc-select">
-                            <option> Staff </option>
-                            <option> Manager </option>
-                            <option> Executive </option>
+                            <option> STAFF </option>
+                            <option> MANAGER </option>
+                            <option> EXECUTIVE </option>
                             <option> CEO </option>
                         </select>
                       </div>
                     </div>
-                      
-                    <div class="form-group">
-                      <div class="input-group input-group-merge input-group-alternative">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                        </div>
-                        <select class="form-control create-acc-select">
-                            <option> Staff </option>
-                            <option> Manager </option>
-                            <option> Executive </option>
-                            <option> CEO </option>
-                        </select>
-                      </div>
-                    </div>
-                      
                     <div class="text-center">
                       <button type="button" class="btn btn-primary my-4">Sign in</button>
                     </div>

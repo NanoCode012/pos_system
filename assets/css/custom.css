@@ -6,3 +6,27 @@
     color: #adb5bd;
     background-color: white;
 }
+
+.nav-tab-margin
+{
+    margin-bottom: 0.5em;
+}
+
+.branch-filter
+{
+    appearance: none;
+    border-radius: 2em;
+    width: 200px;
+    float: right;
+}
+
+.branch-filter:after{
+  position: absolute;
+  content: "";
+  top: 21px;
+  right: 35px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #8898aa transparent transparent transparent;
+}
