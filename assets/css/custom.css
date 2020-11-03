@@ -1,10 +1,23 @@
 .create-acc-select 
 {
+    appearance: none;
     font-size: .875rem;
     font-weight: 400;
     line-height: 1.5;
     color: #adb5bd;
     background-color: white;
+}
+
+.create-acc-select:after
+{
+  position: absolute;
+  content: "";
+  top: 242px;
+  right: 70px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #8898aa transparent transparent transparent;
 }
 
 .nav-tab-margin
