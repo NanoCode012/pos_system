@@ -43,13 +43,13 @@
               </a>
             </li>
             <li class="nav-item nav-tab-margin">
-              <a class="nav-link" href="icons.html">
+              <a class="nav-link" href="products.php">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Products</span>
               </a>
             </li>
             <li class="nav-item nav-tab-margin">
-              <a class="nav-link active" href="map.html">
+              <a class="nav-link active" href="branches.php">
                 <i class="ni ni-pin-3 text-primary"></i>
                 <span class="nav-link-text">Branches</span>
               </a>

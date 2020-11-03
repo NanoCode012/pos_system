@@ -79,7 +79,7 @@
                       </div>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-primary my-4">Sign in</button>
+                      <button type="button" class="btn btn-primary my-4">Create</button>
                     </div>
                   </form>
                 </div>
