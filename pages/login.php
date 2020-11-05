@@ -76,25 +76,30 @@ if (isset($_POST['login'])) {
                                 <small>Sign in with username and password</small>
                             </div>
                             <form role="form" action="" method="post">
-                                <div class="form-group mb-3">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                                <fieldset>
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Username" name="username"
+                                                type="text">
                                         </div>
-                                        <input class="form-control" placeholder="Username" name="username" type="text">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-lock-circle-open"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Password" name="password"
+                                                type="password">
                                         </div>
-                                        <input class="form-control" placeholder="Password" name="password" type="password">
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" name="login" class="btn btn-primary my-4">Sign in</button>
-                                </div>
+                                    <div class="text-center">
+                                        <button type="submit" name="login" class="btn btn-primary my-4">Sign in</button>
+                                    </div>
+                                </fieldset>
                             </form>
                         </div>
                     </div>
