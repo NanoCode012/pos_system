@@ -15,8 +15,14 @@
                 <ul class="navbar-nav nav">
                     <li class="nav-item nav-tab-margin">
                         <a class="nav-link" href="?p=dashboard">
-                            <i class="ni ni-tv-2 text-primary"></i>
+                            <i class="ni ni-chart-bar-32 text-primary"></i>
                             <span class="nav-link-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-tab-margin">
+                        <a class="nav-link" href="?p=stocks">
+                            <i class="ni ni-collection" style="color:#a800c2"></i>
+                            <span class="nav-link-text">Stocks</span>
                         </a>
                     </li>
                     <li class="nav-item nav-tab-margin">
@@ -26,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item nav-tab-margin">
-                        <a class="nav-link" href="?p=branch">
+                        <a class="nav-link" href="?p=branches">
                             <i class="ni ni-pin-3 text-primary"></i>
                             <span class="nav-link-text">Branches</span>
                         </a>
