@@ -3,11 +3,31 @@
 $error = false;
 
 if (isset($_POST['signup'])) {
-    if (!isset($_POST['username']) || trim($_POST['username']) == '') {
-        $error = true;
-        echo 'Username error';
-    } else {
-        $username = trim($_POST['username']);
+    if ($error == false) {
+        if (!isset($_POST['username']) || trim($_POST['username']) == '') {
+            $error = true;
+            echo 'Username error';
+        } else {
+            $username = trim($_POST['username']);
+        }
+    }
+
+    if ($error == false) {
+        if (!isset($_POST['username']) || trim($_POST['username']) == '') {
+            $error = true;
+            echo 'Username error';
+        } else {
+            $username = trim($_POST['username']);
+        }
+    }
+
+    if ($error == false) {
+        if (!isset($_POST['username']) || trim($_POST['username']) == '') {
+            $error = true;
+            echo 'Username error';
+        } else {
+            $username = trim($_POST['username']);
+        }
     }
 
     if ($error == false) {
@@ -99,6 +119,24 @@ if (isset($_POST['signup'])) {
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                                             </div>
+                                            <input class="form-control" placeholder="First name" type="text"
+                                                name="fname">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Last name" type="text"
+                                                name="lname">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                                            </div>
                                             <input class="form-control" placeholder="Username" type="text"
                                                 name="username">
                                         </div>
@@ -133,7 +171,7 @@ if (isset($_POST['signup'])) {
                                         <button type="submit" name="signup" class="btn btn-primary my-4">Sign
                                             up</button>
                                     </div>
-                                <fieldset>
+                                    <fieldset>
                             </form>
                         </div>
                     </div>
