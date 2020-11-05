@@ -3,19 +3,18 @@
 $error = false;
 
 if (isset($_POST['login'])) {
-    if (!isset($_POST['username']) || trim($_POST['username']) == '') {
-        $error = true;
-        echo 'Username error';
-    } else {
-        $username = trim($_POST['username']);
-    }
+    $dict = [
+        'username' => '0',
+        'password' => '0',
+    ];
 
-    if ($error == false) {
-        if (!isset($_POST['password']) || trim($_POST['password']) == '') {
+    foreach ($dict as $key => $value) {
+        if (!isset($_POST[$key]) || trim($_POST[$key]) == '') {
             $error = true;
-            echo 'Password error';
+            echo $key . ' error';
+            break;
         } else {
-            $password = trim($_POST['password']);
+            $dict[$key] = trim($_POST[$key]);
         }
     }
 
@@ -23,16 +22,16 @@ if (isset($_POST['login'])) {
         if (
             $result = $db->row(
                 'SELECT id, password from users WHERE username = ?',
-                $username
+                $dict['username']
             )
         ) {
             $id = $result['id'];
             $password_hash = $result['password'];
-            if (password_verify($password, $password_hash)) {
+            if (password_verify($dict['password'], $password_hash)) {
                 session_destroy();
                 session_start();
                 $_SESSION['user_id'] = $id;
-                header('Location: index.php?p=dashboard');
+                header('Location: ?p=dashboard');
             } else {
                 echo 'Login error';
             }

@@ -3,68 +3,41 @@
 $error = false;
 
 if (isset($_POST['signup'])) {
-    if ($error == false) {
-        if (!isset($_POST['username']) || trim($_POST['username']) == '') {
+    $dict = [
+        'fname' => '0',
+        'lname' => '0',
+        'username' => '0',
+        'password' => '0',
+        'position' => '0',
+    ];
+
+    foreach ($dict as $key => $value) {
+        if (!isset($_POST[$key]) || trim($_POST[$key]) == '') {
             $error = true;
-            echo 'Username error';
+            echo $key . ' error';
+            break;
         } else {
-            $username = trim($_POST['username']);
+            $dict[$key] = trim($_POST[$key]);
         }
     }
 
     if ($error == false) {
-        if (!isset($_POST['username']) || trim($_POST['username']) == '') {
-            $error = true;
-            echo 'Username error';
-        } else {
-            $username = trim($_POST['username']);
-        }
-    }
-
-    if ($error == false) {
-        if (!isset($_POST['username']) || trim($_POST['username']) == '') {
-            $error = true;
-            echo 'Username error';
-        } else {
-            $username = trim($_POST['username']);
-        }
-    }
-
-    if ($error == false) {
-        if (!isset($_POST['password']) || trim($_POST['password']) == '') {
-            $error = true;
-            echo 'Password error';
-        } else {
-            $password = trim($_POST['password']);
-        }
-    }
-
-    if ($error == false) {
-        if (!isset($_POST['position']) || trim($_POST['position']) == '') {
-            $error = true;
-            echo 'Position error';
-        } else {
-            $position = $_POST['position'];
-        }
-    }
-
-    if ($error == false) {
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $password_hash = password_hash($dict['password'], PASSWORD_DEFAULT);
 
         if (
             $result = $db->row(
                 'SELECT COUNT(id) AS count from users WHERE username = ?',
-                $username
+                $dict['username']
             )
         ) {
             if ($result['count'] == 0) {
                 if (
                     $stmt = $db->insert('users', [
-                        'first_name' => 'test',
-                        'last_name' => 'test',
-                        'username' => $username,
+                        'first_name' => $dict['fname'],
+                        'last_name' => $dict['lname'],
+                        'username' => $dict['username'],
                         'password' => $password_hash,
-                        'position' => $position,
+                        'position' => $dict['position'],
                     ])
                 ) {
                     header('Location: ?p=login');
@@ -75,7 +48,7 @@ if (isset($_POST['signup'])) {
                 echo 'User with accname alr exist';
             }
         } else {
-            echo 'Cannot register ' . $username;
+            echo 'Cannot register ' . $dict['username'];
         }
     }
 }
