@@ -146,11 +146,21 @@
             <div class="col-lg-6 col-7">
               <h6 class="h2 text-white d-inline-block mb-0">Branches</h6>
             </div>
-            <div class="col-lg-6 col-5 text-right branch-filter">
-                <select class="form-control branch-filter">
+            <div class="col-lg-6 col-5 text-right">
+              <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
+                <select class="form-control branch-filter" style="margin-left:20px">
+                    <option> Choose Branch </option>
                     <option> Branch A </option>
                     <option> Branch B </option>
                 </select>
+              </div>
+              <div class="col-lg-6 col-5 text-right branch-filter">
+                <select class="form-control branch-filter" style="padding-right:20px;">
+                    <option> Sort by </option>
+                    <option> ID </option>
+                    <option> Name </option>
+                </select>
+              </div>
             </div>
           </div>
         </div>

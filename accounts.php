@@ -147,7 +147,23 @@
               <h6 class="h2 text-white d-inline-block mb-0">Accounts</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+              <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
+                <select class="form-control branch-filter" style="margin-left:20px">
+                    <option> Choose Position </option>
+                    <option> STAFF </option>
+                    <option> MANAGER </option>
+                    <option> EXECUTIVE </option>
+                    <option> CEO </option>
+                    <option> IT </option>
+                </select>
+              </div>
+              <div class="col-lg-6 col-5 text-right branch-filter" style="margin-left:10px;">
+                <select class="form-control branch-filter" style="margin-left:20px">
+                    <option> Choose Branch </option>
+                    <option> Branch A </option>
+                    <option> Branch B </option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -169,6 +185,7 @@
                   <tr>
                     <th scope="col"> </th>
                     <th scope="col" class="sort" data-sort="employee_name">Employee Name</th>
+                    <button class="ni ni-bold-up sortbtn"></button>
                     <th scope="col" class="sort" data-sort="username">Username</th>
                     <th scope="col" class="sort" data-sort="position">Position</th>
                     <th scope="col" class="sort" data-sort="branch_name">Branch Name</th>
