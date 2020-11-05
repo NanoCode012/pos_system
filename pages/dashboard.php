@@ -1,2 +1,1 @@
-<body>
-<a href='?p=logout'>Logout</a>
+<div class="main-content" id="panel"><a href='?p=logout'>Logout</a></div>
