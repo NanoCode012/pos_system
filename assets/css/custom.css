@@ -12,7 +12,7 @@
 {
   position: absolute;
   content: "";
-  top: 242px;
+  top: 366px;
   right: 70px;
   width: 0;
   height: 0;
@@ -46,7 +46,6 @@
 
 .sortbtn
 {
-    background-color: f4f5f7
-;
+    background-color: #f4f5f7;
     border: none;
 }
