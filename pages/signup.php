@@ -93,40 +93,47 @@ if (isset($_POST['signup'])) {
                                 <small>Fill in the following fields.</small>
                             </div>
                             <form method="post" action="" role="form">
-                                <div class="form-group mb-3">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                                <fieldset>
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Username" type="text"
+                                                name="username">
                                         </div>
-                                        <input class="form-control" placeholder="Username" type="text" name="username">
                                     </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-lock-circle-open"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Password" type="password"
+                                                name="password">
                                         </div>
-                                        <input class="form-control" placeholder="Password" type="password" name="password">
                                     </div>
-                                </div>
 
-                                <div class="form-group mb-3 create-acc-select">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                    <div class="form-group mb-3 create-acc-select">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-lock-circle-open"></i></span>
+                                            </div>
+                                            <select class="form-control create-acc-select" name="position">
+                                                <option value="STAFF"> STAFF </option>
+                                                <option value="MANAGER"> MANAGER </option>
+                                                <option value="EXECUTIVE"> EXECUTIVE </option>
+                                                <option value="CEO"> CEO </option>
+                                                <option value="IT"> IT </option>
+                                            </select>
                                         </div>
-                                        <select class="form-control create-acc-select" name="position">
-                                            <option value="STAFF"> STAFF </option>
-                                            <option value="MANAGER"> MANAGER </option>
-                                            <option value="EXECUTIVE"> EXECUTIVE </option>
-                                            <option value="CEO"> CEO </option>
-                                            <option value="IT"> IT </option>
-                                        </select>
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" name="signup" class="btn btn-primary my-4">Sign up</button>
-                                </div>
+                                    <div class="text-center">
+                                        <button type="submit" name="signup" class="btn btn-primary my-4">Sign
+                                            up</button>
+                                    </div>
+                                <fieldset>
                             </form>
                         </div>
                     </div>
