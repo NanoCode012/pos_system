@@ -123,8 +123,8 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit account</a>
-                      <a class="dropdown-item" href="#">Delete</a>
+                      <a class="dropdown-item" href="#">Edit branch</a>
+                      <a class="dropdown-item" href="#">Delete branch</a>
                     </div>
                   </div>
                 </td>
