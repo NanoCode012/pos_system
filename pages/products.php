@@ -80,11 +80,15 @@
           <h6 class="h2 text-white d-inline-block mb-0">Branches</h6>
         </div>
         <div class="col-lg-6 col-5 text-right">
+          <div class="col-lg-6 col-i5 text-right">
+              <button type="button" class="btn btn-secondary">Secondary</button>
+          </div>
           <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
             <select class="form-control branch-filter" style="margin-left:20px">
-                <option> Choose Branch </option>
-                <option> Branch A </option>
-                <option> Branch B </option>
+                <option> Choose Category </option>
+                <option> Stationery </option>
+                <option> Electronics </option>
+                <option> Silverware </option>
             </select>
           </div>
         </div>
@@ -99,16 +103,19 @@
       <div class="card">
         <!-- Card header -->
         <div class="card-header border-0">
-          <h3 class="mb-0">Branches Table</h3>
+          <h3 class="mb-0">Products Table</h3>
         </div>
         <!-- Light table -->
         <div class="table-responsive">
           <table class="table align-items-center table-flush" id="myTable">
             <thead class="thead-light">
               <tr>
-                <th scope="col" onclick="sortTable(0)">Branch ID<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
-                <th scope="col" onclick="sortTable(1)">Branch Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
-                <th scope="col" onclick="sortTable(2)">Branch Address<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" onclick="sortTable(0)">Product ID<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" onclick="sortTable(1)">Product Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button>
+                </th>
+                <th scope="col" style="cursor:default;">Product Category</th>
+                <th scope="col" onclick="sortTable(2)">Sale Price<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" onclick="sortTable(4)">Buy Price<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -116,7 +123,9 @@
               <tr>
                 <td class="budget">1</td>
                 <td class="budget">Anadkae</td>
-                <td class="budget">Djflj</td>
+                <td class="budget">Silverware</td>
+                <td class="budget">432</td>
+                <td class="budget">300</td>
                 <td class="text-right">
                   <div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,7 +141,9 @@
               <tr>
                 <td class="budget">2</td>
                 <td class="budget">Fsadls</td>
-                <td class="budget">Afsjf</td>
+                <td class="budget">Electronics</td>
+                <td class="budget">342</td>
+                <td class="budget">100</td>
                 <td class="text-right">
                   <div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -147,15 +158,17 @@
               </tr>
               <tr>
                 <td class="budget">3</td>
-                <td class="budget">Csadls</td>
-                <td class="budget">Zahdas</td>
+                <td class="budget">Ohdsak</td>
+                <td class="budget">Stationery</td>
+                <td class="budget">1500</td>
+                <td class="budget">730</td>
                 <td class="text-right">
                   <div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit account</a>
+                      <a class="dropdown-item" href="#">Edit product</a>
                       <a class="dropdown-item" href="#">Delete</a>
                     </div>
                   </div>
