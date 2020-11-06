@@ -16,7 +16,7 @@ else {
     ) {
         $page = $_GET['p'];
     } else {
-        $page = '404';
+        $page = 'login';
     }
 }
 
