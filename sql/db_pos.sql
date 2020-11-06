@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 03, 2020 at 06:25 PM
+-- Generation Time: Nov 05, 2020 at 05:20 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -117,6 +117,18 @@ CREATE TABLE `products` (
 -- RELATIONSHIPS FOR TABLE `products`:
 --
 
+--
+-- Triggers `products`
+--
+DROP TRIGGER IF EXISTS `Add stocks to each product`;
+DELIMITER $$
+CREATE TRIGGER `Add stocks to each product` AFTER INSERT ON `products` FOR EACH ROW BEGIN
+	INSERT INTO stocks (product_id, branch_id) 
+    SELECT NEW.id, b.id FROM branches b;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -128,7 +140,7 @@ CREATE TABLE `stocks` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -161,6 +173,23 @@ CREATE TABLE `transactions` (
 --       `stocks` -> `id`
 --
 
+--
+-- Triggers `transactions`
+--
+DROP TRIGGER IF EXISTS `Modify stock`;
+DELIMITER $$
+CREATE TRIGGER `Modify stock` BEFORE INSERT ON `transactions` FOR EACH ROW BEGIN
+	SELECT s.quantity INTO @stock_quantity FROM stocks s WHERE s.id=NEW.stock_id;
+    IF @stock_quantity - NEW.quantity < 0 THEN
+    	SIGNAL SQLSTATE '45000'
+          SET MESSAGE_TEXT = 'Cannot decrease more stock than currently available!';
+	ELSE 
+    	UPDATE stocks s SET s.quantity = s.quantity - NEW.quantity WHERE s.id=NEW.stock_id;
+    END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -182,14 +211,6 @@ CREATE TABLE `users` (
 --
 -- RELATIONSHIPS FOR TABLE `users`:
 --
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `position`, `created_at`, `modified_at`) VALUES
-(1, 'test', 'test', 'a', '$2y$10$Rftr4xlRfvblhUJG/LE7MOPvHEaYZhfI0/lqSumpRXO88BztkByV6', 'STAFF', '2020-11-04 01:09:32', '2020-11-04 01:09:32'),
-(2, 'test', 'test', 'b', '$2y$10$ycH4/zhkNOsYDcHz4bxH0eiXg2zP2/bvVMFPe.i2v3VLEvpYRmL/m', 'MANAGER', '2020-11-04 01:14:19', '2020-11-04 01:14:19');
 
 --
 -- Indexes for dumped tables
@@ -277,7 +298,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
