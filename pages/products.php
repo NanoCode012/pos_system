@@ -80,11 +80,12 @@
           <h6 class="h2 text-white d-inline-block mb-0">Branches</h6>
         </div>
         <div class="col-lg-6 col-5 text-right">
-          <div class="col-lg-6 col-i5 text-right">
-              <button type="button" class="btn btn-secondary">Secondary</button>
-          </div>
+          <!-- Button trigger modal -->
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#createProductModal" style="margin-right:20px; height:45px; border-radius:2em; color:#8898aa;">
+              + New Product
+            </button>
           <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
-            <select class="form-control branch-filter" style="margin-left:20px">
+            <select class="form-control branch-filter" style="margin-left:20px;">
                 <option> Choose Category </option>
                 <option> Stationery </option>
                 <option> Electronics </option>
@@ -92,6 +93,40 @@
             </select>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form role="form" action="" method="post">
+            <fieldset>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <input class="form-control modal-input" placeholder="Username" name="username" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <input class="form-control" placeholder="Password" name="password"
+                            type="password">
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Create</button>
       </div>
     </div>
   </div>
