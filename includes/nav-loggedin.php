@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="nav-item nav-tab-margin">
-                        <a class="nav-link" href="?p=account">
+                        <a class="nav-link" href="?p=accounts">
                             <i class="ni ni-single-02 text-yellow"></i>
                             <span class="nav-link-text">Accounts</span>
                         </a>

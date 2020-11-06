@@ -46,6 +46,14 @@
 
 .sortbtn
 {
-    background-color: #f4f5f7;
+    background: none;
     border: none;
+    width: 15px;
+    height: 20px;
+}
+
+.sort-icon-img
+{
+    width: 15px;
+    height: 15px;
 }
