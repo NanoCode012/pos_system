@@ -2,7 +2,7 @@
 
 // If logged in
 if (isset($_SESSION['user_id'])) {
-    if (!isset($_GET['p'])) {
+    if (!isset($_GET['p']) || in_array($_GET['p'], ['login', 'signup'])) {
         $page = 'dashboard';
     } else {
         $page = $_GET['p'];
