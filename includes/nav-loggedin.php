@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     <li class="nav-item nav-tab-margin">
-                        <a class="nav-link" href="?p=product">
+                        <a class="nav-link" href="?p=products">
                             <i class="ni ni-planet text-orange"></i>
                             <span class="nav-link-text">Products</span>
                         </a>
