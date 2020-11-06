@@ -68,7 +68,9 @@ th
     cursor: pointer;
 }
 
-.modal-input
+.modal-div-input
 {
-    border: 10px solid #adb5bd;
+    border-radius: 2em;
+    border: 1px solid #ced4da;
+    box-shadow: none;
 }

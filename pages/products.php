@@ -111,14 +111,27 @@
          <form role="form" action="" method="post">
             <fieldset>
                 <div class="form-group mb-3">
-                    <div class="input-group input-group-merge input-group-alternative">
-                        <input class="form-control modal-input" placeholder="Username" name="username" type="text">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Product Name" name="username" type="text">
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="input-group input-group-merge input-group-alternative">
-                        <input class="form-control" placeholder="Password" name="password"
-                            type="password">
+                <div class="form-group mb-3">
+                    <select class="form-control create-acc-select modal-div-input" name="position">
+                        <option value="STAFF"> Choose Product Category </option>
+                        <option value="MANAGER"> MANAGER </option>
+                        <option value="EXECUTIVE"> EXECUTIVE </option>
+                        <option value="CEO"> CEO </option>
+                        <option value="IT"> IT </option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Sale Price" name="username" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Buy Price" name="Buy Price" type="text">
                     </div>
                 </div>
             </fieldset>
