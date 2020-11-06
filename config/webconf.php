@@ -16,8 +16,12 @@ else {
     ) {
         $page = $_GET['p'];
     } else {
-        $page = 'login';
+        $page = '404';
     }
+}
+
+if (!file_exists('pages/' . $page . '.php')) {
+    $page = '404';
 }
 
 $servertitle = 'ChanChan POS' . ' | ' . ucwords($page);
