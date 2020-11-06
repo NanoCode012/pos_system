@@ -156,11 +156,11 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td class="budget">1</td>
-                <td class="budget">Anadkae</td>
-                <td class="budget">Silverware</td>
-                <td class="budget">432</td>
-                <td class="budget">300</td>
+                <td>1</td>
+                <td>Anadkae</td>
+                <td>Silverware</td>
+                <td>432</td>
+                <td>300</td>
                 <td class="text-right">
                   <div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -174,11 +174,11 @@
                 </td>
               </tr>
               <tr>
-                <td class="budget">2</td>
-                <td class="budget">Fsadls</td>
-                <td class="budget">Electronics</td>
-                <td class="budget">342</td>
-                <td class="budget">100</td>
+                <td>2</td>
+                <td>Fsadls</td>
+                <td>Electronics</td>
+                <td>342</td>
+                <td>100</td>
                 <td class="text-right">
                   <div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -192,11 +192,11 @@
                 </td>
               </tr>
               <tr>
-                <td class="budget">3</td>
-                <td class="budget">Ohdsak</td>
-                <td class="budget">Stationery</td>
-                <td class="budget">1500</td>
-                <td class="budget">730</td>
+                <td>3</td>
+                <td>Ohdsak</td>
+                <td>Stationery</td>
+                <td>1500</td>
+                <td>730</td>
                 <td class="text-right">
                   <div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

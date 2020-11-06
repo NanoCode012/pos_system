@@ -134,7 +134,7 @@
                 </thead>
                 <tbody class="list">
                   <tr>
-                    <td class="budget">
+                    <td>
                        <div class="media align-items-center">
                            <div class="media-body">
                             <a href="#" class="avatar rounded-circle mr-3">
@@ -150,13 +150,13 @@
                         </div>
                       </div>
                     </th>
-                    <td class="budget">
+                    <td>
                       johnSnow124
                     </td>
-                    <td class="budget">
+                    <td>
                         Staff
                     </td>
-                    <td class="budget">
+                    <td>
                       Branch B
                     </td>
                     <td class="text-right">
@@ -172,7 +172,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="budget">
+                    <td>
                        <div class="media align-items-center">
                            <div class="media-body">
                             <a href="#" class="avatar rounded-circle mr-3">
@@ -188,13 +188,13 @@
                         </div>
                       </div>
                     </th>
-                    <td class="budget">
+                    <td>
                       zanisacka860
                     </td>
-                    <td class="budget">
+                    <td>
                         Manager
                     </td>
-                    <td class="budget">
+                    <td>
                       Branch L
                     </td>
                     <td class="text-right">
@@ -210,7 +210,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="budget">
+                    <td>
                        <div class="media align-items-center">
                            <div class="media-body">
                             <a href="#" class="avatar rounded-circle mr-3">
@@ -226,13 +226,13 @@
                         </div>
                       </div>
                     </th>
-                    <td class="budget">
+                    <td>
                       abbymiller234
                     </td>
-                    <td class="budget">
+                    <td>
                         Executive
                     </td>
-                    <td class="budget">
+                    <td>
                       Branch D
                     </td>
                     <td class="text-right">

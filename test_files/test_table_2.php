@@ -188,9 +188,9 @@
                 </thead>
                 <tbody class="list">
                   <tr>
-                    <td class="budget">1</td>
-                    <td class="budget">Anadkae</td>
-                    <td class="budget">Djflj</td>
+                    <td>1</td>
+                    <td>Anadkae</td>
+                    <td>Djflj</td>
                     <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -204,9 +204,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="budget">2</td>
-                    <td class="budget">Fsadls</td>
-                    <td class="budget">Afsjf</td>
+                    <td>2</td>
+                    <td>Fsadls</td>
+                    <td>Afsjf</td>
                     <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -220,9 +220,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="budget">3</td>
-                    <td class="budget">Csadls</td>
-                    <td class="budget">Zahdas</td>
+                    <td>3</td>
+                    <td>Csadls</td>
+                    <td>Zahdas</td>
                     <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

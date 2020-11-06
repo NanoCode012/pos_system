@@ -32,19 +32,19 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td class="budget">1</td>
-                <td class="budget">Berglunds snabbkop</td>
-                <td class="budget">Sweden</td>
+                <td>1</td>
+                <td>Berglunds snabbkop</td>
+                <td>Sweden</td>
               </tr>
               <tr>
-                <td class="budget">2</td>
-                <td class="budget">North/South</td>
-                <td class="budget">UK</td>
+                <td>2</td>
+                <td>North/South</td>
+                <td>UK</td>
               </tr>
               <tr>
-                <td class="budget">3</td>
-                <td class="budget">Alfreds Futterkiste</td>
-                <td class="budget">Germany</td>
+                <td>3</td>
+                <td>Alfreds Futterkiste</td>
+                <td>Germany</td>
               </tr>
             </tbody>
         </table>

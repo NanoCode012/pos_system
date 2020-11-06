@@ -195,10 +195,10 @@
                         </div>
                       </div>
                     </th>
-                    <td class="budget">
+                    <td>
                       johnSnow124
                     </td>
-                    <td class="budget">
+                    <td>
                         Staff
                     </td>
                     <td class="text-right">
