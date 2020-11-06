@@ -112,30 +112,22 @@
             </div>
             <!-- Light table -->
             <div class="table-responsive">
-              <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" id="myTable">
+              <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" data-sort-name="name"
+  data-sort-order="desc" id="myTable">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"> </th>
-                    <th scope="col" data-sort="employee_name" onclick="sortTable(1)">
+                    <th scope="col" data-sort="employee_name" data-sortable="true">
                         Employee Name
-                        <button class="sortbtn">
-                            <img src="assets/img/icons/sort-icon.png" class="sort-icon-img">
-                        </button>
                     </th>
-                    <th scope="col" data-sort="username" onclick="sortTable(1)">
+                    <th scope="col" data-sort="username" data-sortable="true">
                         Username
-                        <button class="sortbtn">
-                            <img src="assets/img/icons/sort-icon.png" class="sort-icon-img">
-                        </button>
                     </th>
                     <th scope="col" data-sort="position">
                         Position
                     </th>
-                    <th scope="col" data-sort="branch_name" onclick="sortTable(3)">
+                    <th scope="col" data-sort="branch_name" data-sortable="true">
                         Branch Name
-                        <button class="sortbtn">
-                            <img src="assets/img/icons/sort-icon.png" class="sort-icon-img">
-                        </button>
                     </th>
                     <th scope="col"></th>
                   </tr>

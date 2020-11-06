@@ -107,14 +107,15 @@
         </div>
         <!-- Light table -->
         <div class="table-responsive">
-          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" id="myTable">
+          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" data-sort-name="name"
+  data-sort-order="desc" id="myTable">
             <thead class="thead-light">
               <tr>
-                <th scope="col" onclick="sortTable(0)">Product ID<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
-                <th scope="col" onclick="sortTable(1)">Product Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" data-sortable="true">Product ID</th>
+                <th scope="col" data-sortable="true">Product Name</th>
                 <th scope="col" style="cursor:default;">Product Category</th>
-                <th scope="col" onclick="sortTable(2)">Sale Price<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
-                <th scope="col" onclick="sortTable(4)">Buy Price<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" data-sortable="true">Sale Price</th>
+                <th scope="col" data-sortable="true">Buy Price</th>
                 <th scope="col"></th>
               </tr>
             </thead>

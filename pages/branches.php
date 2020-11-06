@@ -103,12 +103,13 @@
         </div>
         <!-- Light table -->
         <div class="table-responsive">
-          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" id="myTable">
+          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" data-sort-name="name"
+  data-sort-order="desc" id="myTable">
             <thead class="thead-light">
               <tr>
-                <th scope="col" onclick="sortTable(0)">Branch ID<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
-                <th scope="col" onclick="sortTable(1)">Branch Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
-                <th scope="col" onclick="sortTable(2)">Branch Address<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" data-sortable="true">Branch ID</th>
+                <th scope="col" data-sortable="true">Branch Name</th>
+                <th scope="col" data-sortable="true">Branch Address</th>
                 <th scope="col"></th>
               </tr>
             </thead>
