@@ -116,7 +116,7 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"> </th>
-                    <th scope="col" class="sort" data-sort="employee_name">Employee Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button> </th>
+                    <th scope="col" class="sort" data-sort="employee_name">Employee Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
                     <th scope="col" class="sort" data-sort="username">Username</th>
                     <th scope="col" class="sort" data-sort="position">Position</th>
                     <th scope="col" class="sort" data-sort="branch_name">Branch Name</th>

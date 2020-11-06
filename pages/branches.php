@@ -106,9 +106,9 @@
           <table class="table align-items-center table-flush" id="myTable">
             <thead class="thead-light">
               <tr>
-                <th scope="col" onclick="sortTable(0)">Branch ID</th>
-                <th scope="col" onclick="sortTable(1)">Branch Name</th>
-                <th scope="col" onclick="sortTable(2)">Branch Address</th>
+                <th scope="col" onclick="sortTable(0)">Branch ID<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" onclick="sortTable(1)">Branch Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
+                <th scope="col" onclick="sortTable(2)">Branch Address<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
                 <th scope="col"></th>
               </tr>
             </thead>
