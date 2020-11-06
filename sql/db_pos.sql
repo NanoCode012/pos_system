@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 05, 2020 at 05:20 PM
+-- Generation Time: Nov 06, 2020 at 02:48 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -211,6 +211,15 @@ CREATE TABLE `users` (
 --
 -- RELATIONSHIPS FOR TABLE `users`:
 --
+
+--
+-- Triggers `users`
+--
+DROP TRIGGER IF EXISTS `Add default branch`;
+DELIMITER $$
+CREATE TRIGGER `Add default branch` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO transactions (user_id, branch_id) VALUES (NEW.id, 1)
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
