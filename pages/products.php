@@ -77,7 +77,7 @@
     <div class="header-body">
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
-          <h6 class="h2 text-white d-inline-block mb-0">Branches</h6>
+          <h6 class="h2 text-white d-inline-block mb-0">Products</h6>
         </div>
         <div class="col-lg-6 col-5 text-right">
           <!-- Button trigger modal -->
@@ -97,7 +97,7 @@
     </div>
   </div>
 </div>
-<!-- Modal -->
+<!-- Modal Create Product -->
 <div class="modal fade" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -155,7 +155,7 @@
         </div>
         <!-- Light table -->
         <div class="table-responsive">
-          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" data-sort-name="name"
+          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="10" data-pagination-parts="pageList" data-sort-name="name"
   data-sort-order="desc" id="myTable">
             <thead class="thead-light">
               <tr>
@@ -180,7 +180,7 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit branch</a>
+                      <a class="dropdown-item" data-toggle="modal" data-target="#editProductsModal">Edit product</a>
                       <a class="dropdown-item" href="#">Delete branch</a>
                     </div>
                   </div>
@@ -198,7 +198,7 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit account</a>
+                      <a class="dropdown-item" data-toggle="modal" data-target="#editProductsModal">Edit Product</a>
                       <a class="dropdown-item" href="#">Delete</a>
                     </div>
                   </div>
@@ -216,7 +216,7 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit product</a>
+                      <a class="dropdown-item" data-toggle="modal" data-target="#editProductsModal">Edit product</a>
                       <a class="dropdown-item" href="#">Delete</a>
                     </div>
                   </div>
@@ -229,4 +229,52 @@
     </div>
   </div>
 </div>
+</div>
+
+<!-- Modal edit product-->
+<div class="modal fade" id="editProductsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form role="form" action="" method="post">
+            <fieldset>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Product Name" name="username" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <select class="form-control create-acc-select modal-div-input" name="position">
+                        <option value="STAFF"> Choose Product Category </option>
+                        <option value="MANAGER"> MANAGER </option>
+                        <option value="EXECUTIVE"> EXECUTIVE </option>
+                        <option value="CEO"> CEO </option>
+                        <option value="IT"> IT </option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Sale Price" name="username" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Buy Price" name="Buy Price" type="text">
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
 </div>
