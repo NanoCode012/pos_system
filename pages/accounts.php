@@ -76,7 +76,7 @@
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Accounts</h6>
+              <h6 class="h2 text-white d-inlin e-block mb-0">Accounts</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
               <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
@@ -112,14 +112,31 @@
             </div>
             <!-- Light table -->
             <div class="table-responsive">
-              <table class="table align-items-center table-flush">
+              <table class="table align-items-center table-flush" id="myTable">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"> </th>
-                    <th scope="col" class="sort" data-sort="employee_name">Employee Name<button class="sortbtn"><img src="assets/img/icons/sort-icon.png" class="sort-icon-img"></button></th>
-                    <th scope="col" class="sort" data-sort="username">Username</th>
-                    <th scope="col" class="sort" data-sort="position">Position</th>
-                    <th scope="col" class="sort" data-sort="branch_name">Branch Name</th>
+                    <th scope="col" data-sort="employee_name" onclick="sortTable(1)">
+                        Employee Name
+                        <button class="sortbtn">
+                            <img src="assets/img/icons/sort-icon.png" class="sort-icon-img">
+                        </button>
+                    </th>
+                    <th scope="col" data-sort="username" onclick="sortTable(1)">
+                        Username
+                        <button class="sortbtn">
+                            <img src="assets/img/icons/sort-icon.png" class="sort-icon-img">
+                        </button>
+                    </th>
+                    <th scope="col" data-sort="position">
+                        Position
+                    </th>
+                    <th scope="col" data-sort="branch_name" onclick="sortTable(3)">
+                        Branch Name
+                        <button class="sortbtn">
+                            <img src="assets/img/icons/sort-icon.png" class="sort-icon-img">
+                        </button>
+                    </th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -149,6 +166,82 @@
                     </td>
                     <td class="budget">
                       Branch B
+                    </td>
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="#">Edit account</a>
+                          <a class="dropdown-item" href="#">Delete</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="budget">
+                       <div class="media align-items-center">
+                           <div class="media-body">
+                            <a href="#" class="avatar rounded-circle mr-3">
+                              <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
+                            </a>
+                           </div>
+                       </div>
+                    </td>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm">Zanis Ackamore</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td class="budget">
+                      zanisacka860
+                    </td>
+                    <td class="budget">
+                        Manager
+                    </td>
+                    <td class="budget">
+                      Branch L
+                    </td>
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="#">Edit account</a>
+                          <a class="dropdown-item" href="#">Delete</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="budget">
+                       <div class="media align-items-center">
+                           <div class="media-body">
+                            <a href="#" class="avatar rounded-circle mr-3">
+                              <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
+                            </a>
+                           </div>
+                       </div>
+                    </td>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm">Abby Miller</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td class="budget">
+                      abbymiller234
+                    </td>
+                    <td class="budget">
+                        Executive
+                    </td>
+                    <td class="budget">
+                      Branch D
                     </td>
                     <td class="text-right">
                       <div class="dropdown">
