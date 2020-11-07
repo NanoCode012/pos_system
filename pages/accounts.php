@@ -97,7 +97,7 @@
                                 <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                    <a class="dropdown-item" href="#">Edit account</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#editAccountModal">Edit account</a>
                                     <a class="dropdown-item" href="#">Delete</a>
                                 </div>
                             </div>
@@ -112,3 +112,104 @@
       </div>
     </div>
   </div>
+
+
+<!-- Modal edit account -->
+<div class="modal fade" id="editAccountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form role="form" action="" method="post">
+            <fieldset>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="First Name" name="name" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Last Name" name="name" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Username" name="name" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Password" name="name" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <select class="form-control create-acc-select modal-div-input" name="category" required>
+                        <option value="" disabled selected> Choose Position </option>
+                        <option value="ELECTRONICS"> STAFF </option>
+                        <option value="DRINKS"> MANAGER </option>
+                        <option value="SNACKS"> EXECUTIVE </option>
+                        <option value="MEDICAL"> CEO </option>
+                        <option value="MEDICAL"> IT </option>
+                    </select>
+                </div>
+                <div style="margin-top:30px; margin-bottom:10px;">
+                    <span>Select branches</span>
+                </div>
+                <div class="form-group mb-0">
+                  <div class="input-group input-group-alternative input-group-merge modal-div-input">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text modal-div-input"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input class="form-control modal-div-input" placeholder="Search" type="text" id="tableSearch">
+                  </div>
+                </div>
+                <div style="height:10px;"></div>
+                <div class="form-group mb-3">
+                    <table
+                      id="table"
+                      data-toggle="table"
+                      data-height="200"
+                      data-click-to-select="true"
+                      data-search="true"
+                      data-search-selector="#tableSearch">
+                      <thead>
+                        <tr>
+                          <th data-field="state" data-checkbox="true"></th>
+                          <th data-field="id">Branch ID</th>
+                          <th data-field="name">Branch Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td></td>
+                              <td>dhe</td>
+                              <td>dhd</td>
+                          </tr>
+                          <tr>
+                              <td></td>
+                              <td>hghg</td>
+                              <td>dhd</td>
+                          </tr>
+                          <tr>
+                              <td></td>
+                              <td>tjv</td>
+                              <td>reyf</td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button name="create" type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
