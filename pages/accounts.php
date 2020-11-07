@@ -43,21 +43,21 @@
             </div>
             <!-- Light table -->
             <div class="table-responsive">
-              <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" data-sort-name="name"
-  data-sort-order="desc" data-search="true" data-search-selector="#searchInput" id="myTable">
+              <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" data-sort-name="id"
+  data-sort-order="asc" data-search="true" data-search-selector="#searchInput" id="myTable">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"> </th>
-                    <th scope="col" data-sort="employee_name" data-sortable="true">
+                    <th scope="col" data-field="name" data-sort="employee_name" data-sortable="true">
                         Employee Name
                     </th>
-                    <th scope="col" data-sort="username" data-sortable="true">
+                    <th scope="col" data-field="username" data-sort="username" data-sortable="true">
                         Username
                     </th>
-                    <th scope="col" data-sort="position">
+                    <th scope="col" data-field="position" data-sort="position">
                         Position
                     </th>
-                    <th scope="col" data-sort="branch_name">
+                    <th scope="col" data-field="branch=name" data-sort="branch_name">
                         Branch Name
                     </th>
                     <th scope="col"></th>

@@ -123,8 +123,8 @@ if (isset($_POST['delete'])) {
         </div>
         <!-- Light table -->
         <div class="table-responsive">
-          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="10" data-pagination-parts="pageList" data-sort-name="name"
-  data-sort-order="desc" data-search="true" data-search-selector="#searchInput" id="myTable">
+          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="2" data-pagination-parts="pageList" data-sort-name="id"
+  data-sort-order="asc" data-search="true" data-search-selector="#searchInput" id="myTable">
             <thead class="thead-light">
               <tr>
                 <th scope="col" data-field="id" data-sortable="true">Product ID</th>
