@@ -1,1 +1,5 @@
-<div class="main-content" id="panel"><a href='?p=logout'>Logout</a></div>
+<!-- Main content -->
+<div class="main-content" id="panel">
+    <!-- Topnav -->
+    <?php include 'includes/nav-top.php'; ?>
+</div>
