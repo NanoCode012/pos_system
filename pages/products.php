@@ -121,7 +121,7 @@ if (isset($_POST['delete'])) {
               + New Product
             </button>
           <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
-            <select class="form-control branch-filter" style="margin-left:20px;" id="filtercategory" onchange="filterby();">
+            <select class="form-control branch-filter" style="margin-left:20px;" id="filtercategory">
                 <option value="ALL" selected> ALL </option>
                 <option value="ELECTRONICS"> ELECTRONICS </option>
                 <option value="DRINKS"> DRINKS </option>
@@ -196,11 +196,11 @@ if (isset($_POST['delete'])) {
   data-sort-order="desc" data-search="true" data-search-selector="#searchInput" id="myTable">
             <thead class="thead-light">
               <tr>
-                <th scope="col" data-sortable="true">Product ID</th>
-                <th scope="col" data-sortable="true">Product Name</th>
-                <th scope="col" style="cursor:default;">Product Category</th>
-                <th scope="col" data-sortable="true">Sale Price</th>
-                <th scope="col" data-sortable="true">Buy Price</th>
+                <th scope="col" data-field="id" data-sortable="true">Product ID</th>
+                <th scope="col" data-field="name" data-sortable="true">Product Name</th>
+                <th scope="col" data-field="category" style="cursor:default;">Product Category</th>
+                <th scope="col" data-field="sell-price" data-sortable="true">Sale Price</th>
+                <th scope="col" data-field="buy-price" data-sortable="true">Buy Price</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -293,24 +293,14 @@ if (isset($_POST['delete'])) {
 <?php } ?>
 
 <script>
-    function filterby() {	
-    // Declare variables	
-    var input, filter, table, tr, td, i, j, isMatch, txtValue;	
-    input = document.getElementById("filtercategory");	
-    filter = input.options[input.selectedIndex].value.toUpperCase();
-    table = document.getElementById("myTable");	
-    tr = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");	
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[2];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (filter == "ALL" || txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
+$(function() {
+    var $table = $('#myTable');
+    var $selector = $('#filtercategory');
+
+    $selector.change(function () {
+        var $category = $(this).children('option:selected').val();
+        if ($category != 'ALL') $table.bootstrapTable('filterBy', {category: $category});
+        else $table.bootstrapTable('filterBy', {});
+    })
+});
 </script>
