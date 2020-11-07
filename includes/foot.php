@@ -10,6 +10,9 @@
 
 <!-- Bootstrap Table JS -->
 <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+
+<!-- Custom JS -->
+<script src="assets/js/custom.js"></script>
 </body>
 
 </html>
