@@ -44,25 +44,24 @@
             <tbody class="list">
             <?php 
             $rows = $db->run('SELECT b.id, b.name, b.address FROM branches b, users u, assignments a WHERE u.id = a.user_id and b.id = a.branch_id and u.id=?', $_SESSION['user_id']);
-            foreach ($rows as $row) {
-                echo '<tr>';
-                echo   '<td>' . $row['id'] .'</td>
-                        <td>' . $row['name'] .'</td>
-                        <td>' . $row['address'] .'</td>
-                        <td class="text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" data-toggle="modal" data-target="#editBranchModal">Edit branch</a>
-                            <a class="dropdown-item">Delete branch</a>
-                            </div>
+            foreach ($rows as $row) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['address']; ?></td>
+                    <td class="text-right">
+                    <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#editBranchModal">Edit branch</a>
+                        <a class="dropdown-item">Delete branch</a>
                         </div>
-                        </td>';
-                echo '</tr>';
-            }
-            ?>
+                    </div>
+                    </td>
+                </tr>
+            <?php } ?>
             </tbody>
           </table>
         </div>
