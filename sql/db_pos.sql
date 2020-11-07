@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 06, 2020 at 02:48 PM
+-- Generation Time: Nov 07, 2020 at 02:15 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -252,8 +252,8 @@ ALTER TABLE `products`
 --
 ALTER TABLE `stocks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`,`branch_id`),
-  ADD KEY `branch_id` (`branch_id`);
+  ADD KEY `branch_id` (`branch_id`) USING BTREE,
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `transactions`
@@ -324,8 +324,8 @@ ALTER TABLE `assignments`
 -- Constraints for table `stocks`
 --
 ALTER TABLE `stocks`
-  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`),
-  ADD CONSTRAINT `stocks_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `stocks_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `transactions`

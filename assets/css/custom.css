@@ -74,3 +74,9 @@ th
     border: 1px solid #ced4da;
     box-shadow: none;
 }
+
+/* To have non-selectable options in Select */
+option[value=""][disabled] 
+{
+    display: none;
+}

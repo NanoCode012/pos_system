@@ -1,3 +1,39 @@
+<?php
+
+if (isset($_POST['create'])) {
+    $db->insert(
+        'products',
+        [
+            'name' => trim($_POST['name']),
+            'category' => $_POST['category'],
+            'sell_price' => $_POST['sell_price'],
+            'buy_price' => $_POST['buy_price']
+        ]
+    );
+} 
+
+if (isset($_POST['edit'])) {
+    $db->update(
+        'products',
+        [
+            'name' => trim($_POST['name']),
+            'category' => $_POST['category'],
+            'sell_price' => trim($_POST['sell_price']),
+            'buy_price' => $_POST['buy_price'],
+        ],
+        ['id' => $_POST['id']]
+    );
+} 
+
+if (isset($_POST['delete'])) {
+    $db->delete(
+        'products',
+        ['id' => $_POST['id']]
+    );
+} 
+?>
+
+
 <!-- Main content -->
 <div class="main-content" id="panel">
 <!-- Topnav -->
@@ -86,10 +122,11 @@
             </button>
           <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
             <select class="form-control branch-filter" style="margin-left:20px;">
-                <option> Choose Category </option>
-                <option> Stationery </option>
-                <option> Electronics </option>
-                <option> Silverware </option>
+                <option value="" disabled selected> Choose Category </option>
+                <option value="ELECTRONICS"> ELECTRONICS </option>
+                <option value="DRINKS"> DRINKS </option>
+                <option value="SNACKS"> SNACKS </option>
+                <option value="MEDICAL"> MEDICAL </option>
             </select>
           </div>
         </div>
@@ -112,34 +149,34 @@
             <fieldset>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Product Name" name="username" type="text">
+                        <input class="form-control modal-div-input" placeholder="Product Name" name="name" type="text">
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <select class="form-control create-acc-select modal-div-input" name="position">
-                        <option value="STAFF"> Choose Product Category </option>
-                        <option value="MANAGER"> MANAGER </option>
-                        <option value="EXECUTIVE"> EXECUTIVE </option>
-                        <option value="CEO"> CEO </option>
-                        <option value="IT"> IT </option>
+                    <select class="form-control create-acc-select modal-div-input" name="category" required>
+                        <option value="" disabled selected> Choose Product Category </option>
+                        <option value="ELECTRONICS"> ELECTRONICS </option>
+                        <option value="DRINKS"> DRINKS </option>
+                        <option value="SNACKS"> SNACKS </option>
+                        <option value="MEDICAL"> MEDICAL </option>
                     </select>
                 </div>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Sale Price" name="username" type="text">
+                        <input class="form-control modal-div-input" placeholder="Sale Price" name="sell_price" type="number">
                     </div>
                 </div>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Buy Price" name="Buy Price" type="text">
+                        <input class="form-control modal-div-input" placeholder="Buy Price" name="buy_price" type="number">
                     </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button name="create" type="submit" class="btn btn-primary">Create</button>
                 </div>
             </fieldset>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Create</button>
       </div>
     </div>
   </div>
@@ -168,60 +205,34 @@
               </tr>
             </thead>
             <tbody class="list">
-              <tr>
-                <td>1</td>
-                <td>Anadkae</td>
-                <td>Silverware</td>
-                <td>432</td>
-                <td>300</td>
-                <td class="text-right">
-                  <div class="dropdown">
-                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#editProductsModal">Edit product</a>
-                      <a class="dropdown-item" href="#">Delete branch</a>
+            <?php
+            $rows = $db->run(
+                'SELECT p.id, p.name, p.category, p.sell_price, p.buy_price FROM products p'
+            );
+            foreach ($rows as $row) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['category']; ?></td>
+                    <td><?php echo $row['sell_price']; ?></td>
+                    <td><?php echo $row['buy_price']; ?></td>
+                    <td class="text-right">
+                    <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#editProductsModal<?php echo $row['id']; ?>">Edit</a>
+                        <form role="form" action="" method="post">
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>" >
+                            <button name="delete" type="submit" class="dropdown-item">Delete</button>
+                        </form>
+                        </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Fsadls</td>
-                <td>Electronics</td>
-                <td>342</td>
-                <td>100</td>
-                <td class="text-right">
-                  <div class="dropdown">
-                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#editProductsModal">Edit Product</a>
-                      <a class="dropdown-item" href="#">Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Ohdsak</td>
-                <td>Stationery</td>
-                <td>1500</td>
-                <td>730</td>
-                <td class="text-right">
-                  <div class="dropdown">
-                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#editProductsModal">Edit product</a>
-                      <a class="dropdown-item" href="#">Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                    </td>
+                </tr>
+            <?php }
+            ?>
             </tbody>
           </table>
         </div>
@@ -231,8 +242,9 @@
 </div>
 </div>
 
+<?php foreach ($rows as $row) { ?>
 <!-- Modal edit product-->
-<div class="modal fade" id="editProductsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editProductsModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -246,35 +258,38 @@
             <fieldset>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Product Name" name="username" type="text">
+                        <input class="form-control modal-div-input" placeholder="Product Name" name="name" type="text" value="<?php echo $row['name']; ?>">
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <select class="form-control create-acc-select modal-div-input" name="position">
-                        <option value="STAFF"> Choose Product Category </option>
-                        <option value="MANAGER"> MANAGER </option>
-                        <option value="EXECUTIVE"> EXECUTIVE </option>
-                        <option value="CEO"> CEO </option>
-                        <option value="IT"> IT </option>
+                    <select class="form-control create-acc-select modal-div-input" name="category" required>
+                        <option value="" disabled selected> Choose Product Category </option>
+                        <option value="ELECTRONICS" <?php if ($row['category'] == 'ELECTRONICS') {echo 'selected';} ?>> ELECTRONICS </option>
+                        <option value="DRINKS" <?php if ($row['category'] == 'DRINKS') {echo 'selected';} ?>> DRINKS </option>
+                        <option value="SNACKS" <?php if ($row['category'] == 'SNACKS') {echo 'selected';} ?>> SNACKS </option>
+                        <option value="MEDICAL" <?php if ($row['category'] == 'MEDICAL') {echo 'selected';} ?>> MEDICAL </option>
                     </select>
                 </div>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Sale Price" name="username" type="text">
+                        <input class="form-control modal-div-input" placeholder="Sale Price" name="sell_price" type="number" value="<?php echo $row['sell_price']; ?>">
                     </div>
                 </div>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Buy Price" name="Buy Price" type="text">
+                        <input class="form-control modal-div-input" placeholder="Buy Price" name="buy_price" type="number" value="<?php echo $row['buy_price']; ?>">
                     </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="hidden" name="id" value="<?php echo $row['id']; ?>" >
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button name="edit" type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
             </fieldset>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Save Changes</button>
-      </div>
     </div>
   </div>
 </div>
+
+<?php } ?>
