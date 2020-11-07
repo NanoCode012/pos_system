@@ -231,8 +231,7 @@ if (isset($_POST['delete'])) {
                     </div>
                     </td>
                 </tr>
-            <?php }
-            ?>
+            <?php } ?>
             </tbody>
           </table>
         </div>

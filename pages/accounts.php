@@ -139,39 +139,40 @@
                     'FROM users u, branches b, assignments a WHERE u.id = a.user_id and b.id = a.branch_id GROUP BY u.id;'
                 );
                 foreach ($rows as $row) {
-                    $branches = explode('|', $row['branch_names']);
-                    echo '<tr>';
-                    echo   '<td>
-                                <div class="media align-items-center">
-                                    <div class="media-body">
-                                        <a href="#" class="avatar rounded-circle mr-3">
-                                        <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </td>
-                            <th scope="row">' . $row['name'] .'</th>
-                            <td>' . $row['username'] .'</td>
-                            <td>' . $row['position'] .'</td>
-                            <td>
-                                <select class="form-control">';
-                                foreach($branches as $branch) echo '<option>' . $branch .'</option>';
-                    echo        '</select>
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
+                    $branches = explode('|', $row['branch_names']); ?>
+                    <tr>
+                        <td>
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <a href="#" class="avatar rounded-circle mr-3">
+                                    <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Edit account</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
-                                    </div>
                                 </div>
-                            </td>';
-                    echo '</tr>';
-                }
-                ?>
+                            </div>
+                        </td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['username']; ?></td>
+                        <td><?php echo $row['position']; ?></td>
+                        <td>
+                            <select class="form-control">
+                            <?php 
+                            foreach($branches as $branch) echo '<option>' . $branch .'</option>'; 
+                            ?>
+                            </select>
+                        </td>
+                        <td class="text-right">
+                            <div class="dropdown">
+                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" href="#">Edit account</a>
+                                    <a class="dropdown-item" href="#">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
                 </tbody>
               </table>
             </div>
