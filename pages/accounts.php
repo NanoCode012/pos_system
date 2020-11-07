@@ -176,7 +176,8 @@
                       data-height="200"
                       data-click-to-select="true"
                       data-search="true"
-                      data-search-selector="#tableSearch">
+                      data-search-selector="#tableSearch" 
+                      data-maintain-meta-data="true">
                       <thead>
                         <tr>
                           <th data-field="state" data-checkbox="true"></th>
@@ -204,7 +205,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
                   <button name="create" type="submit" class="btn btn-primary">Create</button>
                 </div>
             </fieldset>
