@@ -106,7 +106,7 @@
             </thead>
             <tbody class="list">
             <?php 
-            $rows = $db->run('SELECT b.id, b.name, b.address FROM branches b, users u, assignments a WHERE u.id = a.user_id and b.id = a.branch_id');
+            $rows = $db->run('SELECT b.id, b.name, b.address FROM branches b, users u, assignments a WHERE u.id = a.user_id and b.id = a.branch_id and u.id=?', $_SESSION['user_id']);
             foreach ($rows as $row) {
                 echo '<tr>';
                 echo   '<td>' . $row['id'] .'</td>
