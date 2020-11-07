@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 07, 2020 at 02:57 PM
+-- Generation Time: Nov 07, 2020 at 05:24 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -23,6 +23,19 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `db_pos` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `db_pos`;
+
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `create_branch`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_branch` (IN `user_id` INT, IN `branch_name` VARCHAR(255), IN `branch_address` VARCHAR(255))  NO SQL
+BEGIN
+	INSERT INTO branches (name, address) VALUES (branch_name, branch_address);
+    INSERT INTO assignments (assignments.user_id, branch_id) VALUES (user_id, (SELECT LAST_INSERT_ID()));
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -53,7 +66,9 @@ INSERT INTO `assignments` (`id`, `user_id`, `branch_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 2, 3),
-(4, 3, 1);
+(4, 3, 1),
+(5, 4, 1),
+(6, 1, 28);
 
 -- --------------------------------------------------------
 
@@ -104,7 +119,8 @@ INSERT INTO `branches` (`id`, `name`, `address`, `created_at`, `modified_at`) VA
 (23, 'Branch W', '3379 Grant Street MOUNT OLIVE Alabama', '2020-11-02 10:28:17', '2020-11-02 10:28:17'),
 (24, 'Branch X', '198 Jarvis Street Buffalo New York 14216', '2020-11-02 10:28:17', '2020-11-02 10:28:17'),
 (25, 'Branch Y', '3157 Ingram Street Dayton Ohio 45408', '2020-11-02 10:28:17', '2020-11-02 10:28:17'),
-(26, 'Branch Z', '3792 Prospect Valley Road Los Angeles California 90046', '2020-11-02 10:28:17', '2020-11-02 10:28:17');
+(26, 'Branch Z', '3792 Prospect Valley Road Los Angeles California 90046', '2020-11-02 10:28:17', '2020-11-02 10:28:17'),
+(28, 'Branch AA', '2532 Burning Plaza PETERSPLAN 35563', '2020-11-08 00:24:13', '2020-11-08 00:24:13');
 
 -- --------------------------------------------------------
 
@@ -133,7 +149,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `category`, `sell_price`, `buy_price`, `created_at`, `modified_at`) VALUES
 (1, 'Icecream', 'SNACKS', 50, 30, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
-(3, 'Apple Juice', 'DRINKS', 5, 3, '2020-11-07 21:16:14', '2020-11-07 21:16:14');
+(3, 'Apple Juice', 'DRINKS', 5, 3, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(4, 'Hotdog', 'SNACKS', 8, 5, '2020-11-07 23:11:36', '2020-11-07 23:11:36');
 
 --
 -- Triggers `products`
@@ -227,7 +244,33 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (80, 3, 23, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (81, 3, 24, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (82, 3, 25, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
-(83, 3, 26, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14');
+(83, 3, 26, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(89, 4, 1, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(90, 4, 2, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(91, 4, 3, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(92, 4, 4, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(93, 4, 5, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(94, 4, 6, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(95, 4, 7, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(96, 4, 8, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(97, 4, 9, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(98, 4, 10, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(99, 4, 11, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(100, 4, 12, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(101, 4, 13, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(102, 4, 14, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(103, 4, 15, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(104, 4, 16, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(105, 4, 17, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(106, 4, 18, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(107, 4, 19, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(108, 4, 20, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(109, 4, 21, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(110, 4, 22, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(111, 4, 23, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(112, 4, 24, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(113, 4, 25, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(114, 4, 26, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36');
 
 -- --------------------------------------------------------
 
@@ -295,7 +338,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `position`, `created_at`, `modified_at`) VALUES
 (1, 'test', 'test', 'a', '$2y$10$Rftr4xlRfvblhUJG/LE7MOPvHEaYZhfI0/lqSumpRXO88BztkByV6', 'STAFF', '2020-11-04 01:09:32', '2020-11-04 01:09:32'),
 (2, 'abac', 'transform', 'b', '$2y$10$ycH4/zhkNOsYDcHz4bxH0eiXg2zP2/bvVMFPe.i2v3VLEvpYRmL/m', 'MANAGER', '2020-11-04 01:14:19', '2020-11-04 01:14:19'),
-(3, 'Frederico', 'Kami-sama', 'c', '$2y$10$kR5MUsWDnnit/lJG3oFCB.AoBeU.cbQ0YfWD8AmX/3aIdR0QfGCyS', 'MANAGER', '2020-11-05 23:23:42', '2020-11-05 23:23:42');
+(3, 'Frederico', 'Kami-sama', 'c', '$2y$10$kR5MUsWDnnit/lJG3oFCB.AoBeU.cbQ0YfWD8AmX/3aIdR0QfGCyS', 'MANAGER', '2020-11-05 23:23:42', '2020-11-05 23:23:42'),
+(4, 'Brock', 'Twin', 'd', '$2y$10$2k8K2nQlioIYBRdDmCSCa.jRkpzFlEb6Ji/XjAS.rIKuyqmNbqrrm', 'EXECUTIVE', '2020-11-07 22:01:31', '2020-11-07 22:01:31');
 
 --
 -- Triggers `users`
@@ -362,25 +406,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -392,7 +436,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

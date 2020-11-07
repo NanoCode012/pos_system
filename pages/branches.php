@@ -1,3 +1,9 @@
+<?php 
+if (isset($_POST['create'])) {
+    $db->run('CALL create_branch(?,?,?);', $_SESSION['user_id'], trim($_POST['name']), trim($_POST['address']));
+} 
+?>
+
 <!-- Main content -->
 <div class="main-content" id="panel">
 <!-- Topnav -->
@@ -91,7 +97,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Address" name="sell_price" type="number">
+                        <input class="form-control modal-div-input" placeholder="Address" name="address" type="text">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -125,7 +131,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Address" name="sell_price" type="number">
+                        <input class="form-control modal-div-input" placeholder="Address" name="address" type="text">
                     </div>
                 </div>
                 <div class="modal-footer">
