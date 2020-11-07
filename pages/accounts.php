@@ -126,127 +126,52 @@
                     <th scope="col" data-sort="position">
                         Position
                     </th>
-                    <th scope="col" data-sort="branch_name" data-sortable="true">
+                    <th scope="col" data-sort="branch_name">
                         Branch Name
                     </th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody class="list">
-                  <tr>
-                    <td>
-                       <div class="media align-items-center">
-                           <div class="media-body">
-                            <a href="#" class="avatar rounded-circle mr-3">
-                              <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
-                            </a>
-                           </div>
-                       </div>
-                    </td>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">John Snow</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      johnSnow124
-                    </td>
-                    <td>
-                        Staff
-                    </td>
-                    <td>
-                      Branch B
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Edit account</a>
-                          <a class="dropdown-item" href="#">Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                       <div class="media align-items-center">
-                           <div class="media-body">
-                            <a href="#" class="avatar rounded-circle mr-3">
-                              <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
-                            </a>
-                           </div>
-                       </div>
-                    </td>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">Zanis Ackamore</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      zanisacka860
-                    </td>
-                    <td>
-                        Manager
-                    </td>
-                    <td>
-                      Branch L
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Edit account</a>
-                          <a class="dropdown-item" href="#">Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                       <div class="media align-items-center">
-                           <div class="media-body">
-                            <a href="#" class="avatar rounded-circle mr-3">
-                              <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
-                            </a>
-                           </div>
-                       </div>
-                    </td>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">Abby Miller</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      abbymiller234
-                    </td>
-                    <td>
-                        Executive
-                    </td>
-                    <td>
-                      Branch D
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Edit account</a>
-                          <a class="dropdown-item" href="#">Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                <?php 
+                $rows = $db->run(
+                    'SELECT u.id, CONCAT(u.first_name, " ", u.last_name) AS name, u.username, u.position, GROUP_CONCAT(b.name SEPARATOR "|") AS branch_names ' .
+                    'FROM users u, branches b, assignments a WHERE u.id = a.user_id and b.id = a.branch_id GROUP BY u.id;'
+                );
+                foreach ($rows as $row) {
+                    $branches = explode('|', $row['branch_names']);
+                    echo '<tr>';
+                    echo   '<td>
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <a href="#" class="avatar rounded-circle mr-3">
+                                        <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <th scope="row">' . $row['name'] .'</th>
+                            <td>' . $row['username'] .'</td>
+                            <td>' . $row['position'] .'</td>
+                            <td>
+                                <select class="form-control">';
+                                foreach($branches as $branch) echo '<option>' . $branch .'</option>';
+                    echo        '</select>
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <a class="dropdown-item" href="#">Edit account</a>
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    </div>
+                                </div>
+                            </td>';
+                    echo '</tr>';
+                }
+                ?>
                 </tbody>
               </table>
             </div>

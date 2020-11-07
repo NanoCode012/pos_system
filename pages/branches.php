@@ -105,54 +105,27 @@
               </tr>
             </thead>
             <tbody class="list">
-              <tr>
-                <td>1</td>
-                <td>Anadkae</td>
-                <td>Djflj</td>
-                <td class="text-right">
-                  <div class="dropdown">
-                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit branch</a>
-                      <a class="dropdown-item" href="#">Delete branch</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Fsadls</td>
-                <td>Afsjf</td>
-                <td class="text-right">
-                  <div class="dropdown">
-                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit account</a>
-                      <a class="dropdown-item" href="#">Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Csadls</td>
-                <td>Zahdas</td>
-                <td class="text-right">
-                  <div class="dropdown">
-                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="#">Edit account</a>
-                      <a class="dropdown-item" href="#">Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+            <?php 
+            $rows = $db->run('SELECT b.id, b.name, b.address FROM branches b, users u, assignments a WHERE u.id = a.user_id and b.id = a.branch_id');
+            foreach ($rows as $row) {
+                echo '<tr>';
+                echo   '<td>' . $row['id'] .'</td>
+                        <td>' . $row['name'] .'</td>
+                        <td>' . $row['address'] .'</td>
+                        <td class="text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                            <a class="dropdown-item" href="#">Edit branch</a>
+                            <a class="dropdown-item" href="#">Delete branch</a>
+                            </div>
+                        </div>
+                        </td>';
+                echo '</tr>';
+            }
+            ?>
             </tbody>
           </table>
         </div>
