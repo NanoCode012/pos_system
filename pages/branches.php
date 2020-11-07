@@ -118,8 +118,8 @@
                             <i class="fas fa-ellipsis-v"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="#">Edit branch</a>
-                            <a class="dropdown-item" href="#">Delete branch</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#createBranchModal>Edit branch</a>
+                            <a class="dropdown-item">Delete branch</a>
                             </div>
                         </div>
                         </td>';
@@ -133,4 +133,52 @@
     </div>
   </div>
 </div>
+</div>
+
+<!-- Modal create new branch -->
+<div class="modal fade" id="createBranchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Branch</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form role="form" action="" method="post">
+            <fieldset>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Product Name" name="name" type="text">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <select class="form-control create-acc-select modal-div-input" name="category" required>
+                        <option value="" disabled selected> Choose Product Category </option>
+                        <option value="ELECTRONICS"> ELECTRONICS </option>
+                        <option value="DRINKS"> DRINKS </option>
+                        <option value="SNACKS"> SNACKS </option>
+                        <option value="MEDICAL"> MEDICAL </option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Sale Price" name="sell_price" type="number">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative modal-div-input">
+                        <input class="form-control modal-div-input" placeholder="Buy Price" name="buy_price" type="number">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button name="create" type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
