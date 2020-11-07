@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 07, 2020 at 02:15 PM
+-- Generation Time: Nov 07, 2020 at 02:57 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -44,6 +44,16 @@ CREATE TABLE `assignments` (
 --   `branch_id`
 --       `branches` -> `id`
 --
+
+--
+-- Dumping data for table `assignments`
+--
+
+INSERT INTO `assignments` (`id`, `user_id`, `branch_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 3),
+(4, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -118,6 +128,14 @@ CREATE TABLE `products` (
 --
 
 --
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `category`, `sell_price`, `buy_price`, `created_at`, `modified_at`) VALUES
+(1, 'Icecream', 'SNACKS', 50, 30, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(3, 'Apple Juice', 'DRINKS', 5, 3, '2020-11-07 21:16:14', '2020-11-07 21:16:14');
+
+--
 -- Triggers `products`
 --
 DROP TRIGGER IF EXISTS `Add stocks to each product`;
@@ -152,6 +170,64 @@ CREATE TABLE `stocks` (
 --   `product_id`
 --       `products` -> `id`
 --
+
+--
+-- Dumping data for table `stocks`
+--
+
+INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`, `modified_at`) VALUES
+(1, 1, 1, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(2, 1, 2, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(3, 1, 3, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(4, 1, 4, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(5, 1, 5, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(6, 1, 6, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(7, 1, 7, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(8, 1, 8, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(9, 1, 9, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(10, 1, 10, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(11, 1, 11, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(12, 1, 12, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(13, 1, 13, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(14, 1, 14, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(15, 1, 15, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(16, 1, 16, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(17, 1, 17, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(18, 1, 18, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(19, 1, 19, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(20, 1, 20, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(21, 1, 21, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(22, 1, 22, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(23, 1, 23, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(24, 1, 24, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(25, 1, 25, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(26, 1, 26, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(58, 3, 1, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(59, 3, 2, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(60, 3, 3, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(61, 3, 4, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(62, 3, 5, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(63, 3, 6, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(64, 3, 7, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(65, 3, 8, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(66, 3, 9, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(67, 3, 10, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(68, 3, 11, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(69, 3, 12, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(70, 3, 13, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(71, 3, 14, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(72, 3, 15, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(73, 3, 16, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(74, 3, 17, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(75, 3, 18, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(76, 3, 19, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(77, 3, 20, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(78, 3, 21, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(79, 3, 22, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(80, 3, 23, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(81, 3, 24, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(82, 3, 25, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(83, 3, 26, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14');
 
 -- --------------------------------------------------------
 
@@ -213,11 +289,20 @@ CREATE TABLE `users` (
 --
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `position`, `created_at`, `modified_at`) VALUES
+(1, 'test', 'test', 'a', '$2y$10$Rftr4xlRfvblhUJG/LE7MOPvHEaYZhfI0/lqSumpRXO88BztkByV6', 'STAFF', '2020-11-04 01:09:32', '2020-11-04 01:09:32'),
+(2, 'abac', 'transform', 'b', '$2y$10$ycH4/zhkNOsYDcHz4bxH0eiXg2zP2/bvVMFPe.i2v3VLEvpYRmL/m', 'MANAGER', '2020-11-04 01:14:19', '2020-11-04 01:14:19'),
+(3, 'Frederico', 'Kami-sama', 'c', '$2y$10$kR5MUsWDnnit/lJG3oFCB.AoBeU.cbQ0YfWD8AmX/3aIdR0QfGCyS', 'MANAGER', '2020-11-05 23:23:42', '2020-11-05 23:23:42');
+
+--
 -- Triggers `users`
 --
 DROP TRIGGER IF EXISTS `Add default branch`;
 DELIMITER $$
-CREATE TRIGGER `Add default branch` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO transactions (user_id, branch_id) VALUES (NEW.id, 1)
+CREATE TRIGGER `Add default branch` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO assignments (user_id, branch_id) VALUES (NEW.id, 1)
 $$
 DELIMITER ;
 
@@ -277,7 +362,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `branches`
@@ -289,13 +374,13 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -307,7 +392,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
