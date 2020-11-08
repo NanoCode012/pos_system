@@ -12,12 +12,12 @@
             <div class="col-lg-6 col-5 text-right">
               <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
                 <select class="form-control branch-filter" style="margin-left:20px">
-                    <option> Choose Position </option>
-                    <option> STAFF </option>
-                    <option> MANAGER </option>
-                    <option> EXECUTIVE </option>
-                    <option> CEO </option>
-                    <option> IT </option>
+                    <option value="ALL"> ALL </option>
+                    <option value="STAFF"> STAFF </option>
+                    <option value="MANAGER"> MANAGER </option>
+                    <option value="EXECUTIVE"> EXECUTIVE </option>
+                    <option value="CEO"> CEO </option>
+                    <option value="IT"> IT </option>
                 </select>
               </div>
               <div class="col-lg-6 col-5 text-right branch-filter" style="margin-left:10px;">
