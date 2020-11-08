@@ -11,7 +11,7 @@
             </div>
             <div class="col-lg-6 col-5 text-right">
               <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
-                <select class="form-control branch-filter" style="margin-left:20px">
+                <select class="form-control branch-filter" style="margin-left:20px" id="filterPosition">
                     <option value="ALL"> ALL </option>
                     <option value="STAFF"> STAFF </option>
                     <option value="MANAGER"> MANAGER </option>
@@ -21,10 +21,10 @@
                 </select>
               </div>
               <div class="col-lg-6 col-5 text-right branch-filter" style="margin-left:10px;">
-                <select class="form-control branch-filter" style="margin-left:20px">
-                    <option> Choose Branch </option>
-                    <option> Branch A </option>
-                    <option> Branch B </option>
+                <select class="form-control branch-filter" style="margin-left:20px" id="filterBranch">
+                    <option value="ALL"> ALL </option>
+                    <option value="Branch A"> Branch A </option>
+                    <option value="Branch B"> Branch B </option>
                 </select>
               </div>
             </div>
@@ -48,16 +48,16 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"> </th>
-                    <th scope="col" data-field="name" data-sort="employee_name" data-sortable="true">
+                    <th scope="col" data-field="name" data-sortable="true">
                         Employee Name
                     </th>
-                    <th scope="col" data-field="username" data-sort="username" data-sortable="true">
+                    <th scope="col" data-field="username" data-sortable="true">
                         Username
                     </th>
-                    <th scope="col" data-field="position" data-sort="position">
+                    <th scope="col" data-field="position" data-sortable="true">
                         Position
                     </th>
-                    <th scope="col" data-field="branch=name" data-sort="branch_name">
+                    <th scope="col" data-field="branch" data-sortable="true">
                         Branch Name
                     </th>
                     <th scope="col"></th>
@@ -214,3 +214,38 @@
     </div>
   </div>
 </div>
+
+<script>
+$(function() {
+    var $table = $('#myTable');
+    var $selectorPosition = $('#filterPosition');
+    var $selectorBranch = $('#filterBranch');
+
+    $.fn.myfunction = function (row, filter) {
+        let match = false;
+        filter = filter['branch'].toUpperCase();
+        var $options = $(row['branch']).children('option');
+        $options.each((index, val) => {
+            if ($(val).val().toUpperCase() === filter) { console.log('i here'); match = true; }
+        });
+        return match;
+    };
+
+    $selectorPosition.change(function () {
+        var $position = $(this).children('option:selected').val();
+        if ($position != 'ALL') $table.bootstrapTable('filterBy', {position: $position});
+        else $table.bootstrapTable('filterBy', {});
+    });
+
+    $selectorBranch.change(function () {
+        var $branch = $(this).children('option:selected').val();
+        if ($branch != 'ALL') {
+            $table.bootstrapTable('refreshOptions', { filterOptions: { filterAlgorithm: $.fn.myfunction } });
+            $table.bootstrapTable('filterBy', { branch: $branch });
+        } else {
+            $table.bootstrapTable('refreshOptions', { filterOptions: { filterAlgorithm: 'and' } });
+            $table.bootstrapTable('filterBy', {});
+        }
+    });
+});
+</script>
