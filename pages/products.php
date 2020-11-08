@@ -232,6 +232,6 @@ $(function() {
         var $category = $(this).children('option:selected').val();
         if ($category != 'ALL') $table.bootstrapTable('filterBy', {category: $category});
         else $table.bootstrapTable('filterBy', {});
-    })
+    });
 });
 </script>
