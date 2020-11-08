@@ -192,7 +192,7 @@ if (isset($_POST['delete'])) {
         </div>
         <!-- Light table -->
         <div class="table-responsive">
-          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="10" data-pagination-parts="pageList" data-sort-name="name"
+          <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="6" data-pagination-parts="pageList" data-sort-name="name"
   data-sort-order="desc" data-search="true" data-search-selector="#searchInput" id="myTable">
             <thead class="thead-light">
               <tr>
