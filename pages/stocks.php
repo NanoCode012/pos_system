@@ -1,76 +1,18 @@
+<?php
+if (isset($_POST['edit'])) {
+    $db->update(
+        'stocks',
+        [
+            'quantity' => trim($_POST['quantity']),
+        ],
+        ['id' => $_POST['stock-id']]
+    );
+} 
+?>
 <!-- Main Content -->
 <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Search form -->
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-            <div class="form-group mb-0">
-              <div class="input-group input-group-alternative input-group-merge">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                <input class="form-control" placeholder="Search" type="text">
-              </div>
-            </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </form>
-          <!-- Navbar links -->
-          <ul class="navbar-nav align-items-center  ml-md-auto ">
-            <li class="nav-item d-xl-none">
-              <!-- Sidenav toggler -->
-              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item d-sm-none">
-              <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                <i class="ni ni-zoom-split-in"></i>
-              </a>
-            </li>
-          </ul>
-          <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-            <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
-                  </span>
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
-                  </div>
-                </div>
-              </a>
-              <div class="dropdown-menu  dropdown-menu-right ">
-                <div class="dropdown-header noti-title">
-                  <h6 class="text-overflow m-0">Welcome!</h6>
-                </div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-single-02"></i>
-                  <span>My profile</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
-                </a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php include 'includes/nav-top.php'; ?>
     <!-- Header -->
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
@@ -81,17 +23,18 @@
             </div>
             <div class="col-lg-6 col-5 text-right">
               <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
-                <select class="form-control branch-filter" style="margin-left:20px">
-                    <option> Choose Branch </option>
-                    <option> Branch A </option>
-                    <option> Branch B </option>
-                </select>
-              </div>
-              <div class="col-lg-6 col-5 text-right branch-filter">
-                <select class="form-control branch-filter" style="padding-right:20px;">
-                    <option> Sort by </option>
-                    <option> ID </option>
-                    <option> Name </option>
+                <select class="form-control branch-filter" style="margin-left:20px" id="filterBranch">
+                    <option value="ALL"> ALL </option>
+                    <?php
+                    $rows = $db->run(
+                        'SELECT b.name FROM branches b, users u, assignments a ' .
+                            'WHERE u.id = a.user_id and b.id = a.branch_id and u.id=?',
+                        $_SESSION['user_id']
+                    );
+                    foreach ($rows as $row) { ?>
+                        <option value="<?php echo $row['name']; ?>"> <?php echo $row['name']; ?> </option>
+                    <?php }
+                    ?>
                 </select>
               </div>
             </div>
@@ -110,45 +53,46 @@
             </div>
             <!-- Light table -->
             <div class="table-responsive">
-              <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="6" data-pagination-parts="pageList">
+              <table class="table align-items-center table-flush" data-toggle="table" data-pagination="true" data-page-size="6" 
+              data-pagination-parts="pageList" data-sort-name="stock-id" data-sort-order="asc" data-search="true" data-search-selector="#searchInput"
+              id="myTable">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col" class="sort">Stock ID</th>
-                    <th scope="col" class="sort">Product ID</th>
-                    <th scope="col" class="sort">Branch ID</th>
-                    <th scope="col" class="sort">Product Name</th>
-                    <th scope="col" class="sort">Quantity</th>
-                      <th scope="col"></th>
+                    <th scope="col" data-field="stock-id" data-sortable="true">Stock ID</th>
+                    <th scope="col" data-field="product-id" data-sortable="true">Product ID</th>
+                    <th scope="col" data-field="product-name" data-sortable="true">Product Name</th>
+                    <th scope="col" data-field="branch" data-sortable="true">Branch Name</th>
+                    <th scope="col" data-field="quantity" data-sortable="true">Quantity</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody class="list">
-                  <tr>
-                    <td>
-                      12
-                    </td>
-                    <td>
-                      79
-                    </td>
-                    <td>
-                      53
-                    </td>
-                    <td>
-                      Dkfs
-                    </td>
-                    <td>
-                      534
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#modifyStockModal">Edit Stock</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                    <?php 
+                    $rows = $db->run(
+                            'SELECT s.id AS stock_id, p.id AS product_id, p.name AS product_name, b.name AS branch_name, s.quantity ' .
+                            'FROM branches b, users u, assignments a, products p, stocks s ' .
+                            'WHERE u.id = a.user_id and b.id = a.branch_id and u.id=? and s.product_id = p.id and s.branch_id = b.id',
+                        $_SESSION['user_id']
+                    ); 
+                    foreach($rows as $row) { ?>
+                    <tr>
+                        <td><?php echo $row['stock_id']; ?></td>
+                        <td><?php echo $row['product_id']; ?></td>
+                        <td><?php echo $row['product_name']; ?></td>
+                        <td><?php echo $row['branch_name']; ?></td>
+                        <td><?php echo $row['quantity']; ?></td>
+                        <td class="text-right">
+                            <div class="dropdown">
+                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                <a class="dropdown-item" data-toggle="modal" data-target="#modifyStockModal<?php echo $row['stock_id']; ?>">Edit Stock</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -158,8 +102,9 @@
     </div>
   </div>
 
+<?php foreach($rows as $row) { ?>
 <!-- Modal modify stock -->
-<div class="modal fade" id="modifyStockModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modifyStockModal<?php echo $row['stock_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -173,13 +118,14 @@
             <fieldset>
                 <div class="form-group mb-3">
                     <div class="input-group input-group-merge input-group-alternative modal-div-input">
-                        <input class="form-control modal-div-input" placeholder="Quantity" name="sell_price" type="number">
+                        <input class="form-control modal-div-input" placeholder="Quantity" name="quantity" type="number" value="<?php echo $row['quantity']; ?>">
                     </div>
                 </div>
                 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button name="create" type="submit" class="btn btn-primary">Save changes</button>
+                    <input type="hidden" name="stock-id" value="<?php echo $row['stock_id']; ?>" >
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </fieldset>
         </form>
@@ -187,3 +133,17 @@
     </div>
   </div>
 </div>
+<?php } ?>
+
+<script>
+$(function() {
+    var $table = $('#myTable');
+    var $selectorBranch = $('#filterBranch');
+
+    $selectorBranch.change(function () {
+        var $branch = $(this).children('option:selected').val();
+        if ($branch != 'ALL') $table.bootstrapTable('filterBy', { branch: $branch });
+        else $table.bootstrapTable('filterBy', {});
+    });
+});
+</script>
