@@ -23,8 +23,11 @@
               <div class="col-lg-6 col-5 text-right branch-filter" style="margin-left:10px;">
                 <select class="form-control branch-filter" style="margin-left:20px" id="filterBranch">
                     <option value="ALL"> ALL </option>
-                    <option value="Branch A"> Branch A </option>
-                    <option value="Branch B"> Branch B </option>
+                    <?php 
+                    $rows = $db->run('SELECT * FROM branches');
+                    foreach($rows as $row) { ?>
+                        <option value="<?php echo $row['name']; ?>"> <?php echo $row['name']; ?> </option>
+                    <?php } ?>
                 </select>
               </div>
             </div>
