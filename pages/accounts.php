@@ -229,7 +229,7 @@ $(function() {
         filter = filter['branch'].toUpperCase();
         var $options = $(row['branch']).children('option');
         $options.each((index, val) => {
-            if ($(val).val().toUpperCase() === filter) { console.log('i here'); match = true; }
+            if ($(val).val().toUpperCase() === filter) { match = true; }
         });
         return match;
     };
