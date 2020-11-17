@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 17, 2020 at 04:58 PM
+-- Generation Time: Nov 17, 2020 at 05:07 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -225,7 +225,7 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`, `modified_at`) VALUES
-(1, 1, 1, 1, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(1, 1, 1, 3, '2020-11-05 23:50:46', '2020-11-18 00:02:36'),
 (2, 1, 2, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (3, 1, 3, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (4, 1, 4, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
@@ -346,25 +346,45 @@ INSERT INTO `transactions` (`id`, `stock_id`, `quantity`, `created_at`) VALUES
 --
 -- Triggers `transactions`
 --
-DROP TRIGGER IF EXISTS `Modify stock`;
+DROP TRIGGER IF EXISTS `Aggregate stock quantity after delete`;
 DELIMITER $$
-CREATE TRIGGER `Modify stock` BEFORE INSERT ON `transactions` FOR EACH ROW BEGIN
+CREATE TRIGGER `Aggregate stock quantity after delete` AFTER DELETE ON `transactions` FOR EACH ROW BEGIN
+	UPDATE stocks 
+    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id) 
+    WHERE id = OLD.stock_id;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `Aggregate stock quantity after insert`;
+DELIMITER $$
+CREATE TRIGGER `Aggregate stock quantity after insert` AFTER INSERT ON `transactions` FOR EACH ROW BEGIN
+	UPDATE stocks 
+    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id) 
+    WHERE id = NEW.stock_id;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `Aggregate stock quantity after update`;
+DELIMITER $$
+CREATE TRIGGER `Aggregate stock quantity after update` AFTER UPDATE ON `transactions` FOR EACH ROW BEGIN
+	UPDATE stocks 
+    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id) 
+    WHERE id = OLD.stock_id;
+    
+    UPDATE stocks 
+    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id) 
+    WHERE id = NEW.stock_id;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `Check if enough stocks`;
+DELIMITER $$
+CREATE TRIGGER `Check if enough stocks` BEFORE INSERT ON `transactions` FOR EACH ROW BEGIN
 	SELECT s.quantity INTO @stock_quantity FROM stocks s WHERE s.id=NEW.stock_id;
     IF @stock_quantity - NEW.quantity < 0 THEN
     	SIGNAL SQLSTATE '45000'
           SET MESSAGE_TEXT = 'Cannot decrease more stock than currently available!';
-	ELSE 
-    	UPDATE stocks s SET s.quantity = s.quantity - NEW.quantity WHERE s.id=NEW.stock_id;
     END IF;
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `Update stock quantity`;
-DELIMITER $$
-CREATE TRIGGER `Update stock quantity` AFTER UPDATE ON `transactions` FOR EACH ROW BEGIN
-	UPDATE stocks 
-    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id) 
-    WHERE id = NEW.stock_id;
 END
 $$
 DELIMITER ;
