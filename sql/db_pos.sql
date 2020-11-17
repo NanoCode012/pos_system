@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 17, 2020 at 05:07 PM
+-- Generation Time: Nov 17, 2020 at 05:18 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -225,7 +225,7 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`, `modified_at`) VALUES
-(1, 1, 1, 3, '2020-11-05 23:50:46', '2020-11-18 00:02:36'),
+(1, 1, 1, 0, '2020-11-05 23:50:46', '2020-11-18 00:17:04'),
 (2, 1, 2, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (3, 1, 3, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (4, 1, 4, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
@@ -337,20 +337,13 @@ CREATE TABLE `transactions` (
 --
 
 --
--- Dumping data for table `transactions`
---
-
-INSERT INTO `transactions` (`id`, `stock_id`, `quantity`, `created_at`) VALUES
-(1, 1, 1, '2020-11-17 23:50:00');
-
---
 -- Triggers `transactions`
 --
 DROP TRIGGER IF EXISTS `Aggregate stock quantity after delete`;
 DELIMITER $$
 CREATE TRIGGER `Aggregate stock quantity after delete` AFTER DELETE ON `transactions` FOR EACH ROW BEGIN
 	UPDATE stocks 
-    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id) 
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id), 0)
     WHERE id = OLD.stock_id;
 END
 $$
@@ -359,7 +352,7 @@ DROP TRIGGER IF EXISTS `Aggregate stock quantity after insert`;
 DELIMITER $$
 CREATE TRIGGER `Aggregate stock quantity after insert` AFTER INSERT ON `transactions` FOR EACH ROW BEGIN
 	UPDATE stocks 
-    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id) 
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id), 0)
     WHERE id = NEW.stock_id;
 END
 $$
@@ -368,11 +361,11 @@ DROP TRIGGER IF EXISTS `Aggregate stock quantity after update`;
 DELIMITER $$
 CREATE TRIGGER `Aggregate stock quantity after update` AFTER UPDATE ON `transactions` FOR EACH ROW BEGIN
 	UPDATE stocks 
-    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id) 
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id), 0)
     WHERE id = OLD.stock_id;
     
     UPDATE stocks 
-    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id) 
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id), 0)
     WHERE id = NEW.stock_id;
 END
 $$
@@ -545,7 +538,7 @@ ALTER TABLE `stocks`
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`stock_id`) REFERENCES `stocks` (`id`);
+  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`stock_id`) REFERENCES `stocks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
