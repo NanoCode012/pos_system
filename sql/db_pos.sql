@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 07, 2020 at 05:24 PM
+-- Generation Time: Nov 17, 2020 at 04:37 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -68,7 +68,8 @@ INSERT INTO `assignments` (`id`, `user_id`, `branch_id`) VALUES
 (3, 2, 3),
 (4, 3, 1),
 (5, 4, 1),
-(6, 1, 28);
+(6, 1, 28),
+(7, 1, 30);
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,20 @@ INSERT INTO `branches` (`id`, `name`, `address`, `created_at`, `modified_at`) VA
 (24, 'Branch X', '198 Jarvis Street Buffalo New York 14216', '2020-11-02 10:28:17', '2020-11-02 10:28:17'),
 (25, 'Branch Y', '3157 Ingram Street Dayton Ohio 45408', '2020-11-02 10:28:17', '2020-11-02 10:28:17'),
 (26, 'Branch Z', '3792 Prospect Valley Road Los Angeles California 90046', '2020-11-02 10:28:17', '2020-11-02 10:28:17'),
-(28, 'Branch AA', '2532 Burning Plaza PETERSPLAN 35563', '2020-11-08 00:24:13', '2020-11-08 00:24:13');
+(28, 'Branch AA', '2532 Burning Plaza PETERSPLAN 35563', '2020-11-08 00:24:13', '2020-11-08 00:24:13'),
+(30, 'Branch AB', 'Riverdale High', '2020-11-17 23:30:02', '2020-11-17 23:30:02');
+
+--
+-- Triggers `branches`
+--
+DROP TRIGGER IF EXISTS `Add all products to branch`;
+DELIMITER $$
+CREATE TRIGGER `Add all products to branch` AFTER INSERT ON `branches` FOR EACH ROW BEGIN
+	INSERT INTO stocks(product_id, branch_id) 
+    SELECT p.id, NEW.id FROM products p;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -193,7 +207,7 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`, `modified_at`) VALUES
-(1, 1, 1, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(1, 1, 1, 2, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (2, 1, 2, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (3, 1, 3, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (4, 1, 4, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
@@ -270,7 +284,10 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (111, 4, 23, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
 (112, 4, 24, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
 (113, 4, 25, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
-(114, 4, 26, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36');
+(114, 4, 26, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
+(115, 3, 30, 0, '2020-11-17 23:30:02', '2020-11-17 23:30:02'),
+(116, 4, 30, 0, '2020-11-17 23:30:02', '2020-11-17 23:30:02'),
+(117, 1, 30, 0, '2020-11-17 23:30:02', '2020-11-17 23:30:02');
 
 -- --------------------------------------------------------
 
@@ -406,13 +423,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -424,7 +441,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `transactions`
