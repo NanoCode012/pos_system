@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 17, 2020 at 04:37 PM
+-- Generation Time: Nov 17, 2020 at 04:51 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -28,6 +28,14 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `Add transaction`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Add transaction` (IN `sid` INT, IN `quantity` INT)  NO SQL
+BEGIN
+	SET @old_quantity = (SELECT quantity FROM stocks where id = sid);
+    SET @diff = quantity - @old_quantity;
+    INSERT INTO transactions (stock_id, quantity) VALUES (sid, @diff);
+END$$
+
 DROP PROCEDURE IF EXISTS `create_branch`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_branch` (IN `user_id` INT, IN `branch_name` VARCHAR(255), IN `branch_address` VARCHAR(255))  NO SQL
 BEGIN
@@ -207,7 +215,7 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`, `modified_at`) VALUES
-(1, 1, 1, 2, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
+(1, 1, 1, 1, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (2, 1, 2, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (3, 1, 3, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (4, 1, 4, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
@@ -310,6 +318,13 @@ CREATE TABLE `transactions` (
 --
 
 --
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `stock_id`, `quantity`, `created_at`) VALUES
+(1, 1, 1, '2020-11-17 23:50:00');
+
+--
 -- Triggers `transactions`
 --
 DROP TRIGGER IF EXISTS `Modify stock`;
@@ -322,6 +337,15 @@ CREATE TRIGGER `Modify stock` BEFORE INSERT ON `transactions` FOR EACH ROW BEGIN
 	ELSE 
     	UPDATE stocks s SET s.quantity = s.quantity - NEW.quantity WHERE s.id=NEW.stock_id;
     END IF;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `Update stock quantity`;
+DELIMITER $$
+CREATE TRIGGER `Update stock quantity` AFTER UPDATE ON `transactions` FOR EACH ROW BEGIN
+	UPDATE stocks 
+    SET quantity = (SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id) 
+    WHERE id = NEW.stock_id;
 END
 $$
 DELIMITER ;
@@ -447,7 +471,7 @@ ALTER TABLE `stocks`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
