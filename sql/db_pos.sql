@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 17, 2020 at 04:51 PM
+-- Generation Time: Nov 17, 2020 at 04:58 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -143,6 +143,11 @@ CREATE TRIGGER `Add all products to branch` AFTER INSERT ON `branches` FOR EACH 
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `Update modified at branches`;
+DELIMITER $$
+CREATE TRIGGER `Update modified at branches` BEFORE UPDATE ON `branches` FOR EACH ROW SET NEW.modified_at := NOW()
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -183,6 +188,11 @@ CREATE TRIGGER `Add stocks to each product` AFTER INSERT ON `products` FOR EACH 
 	INSERT INTO stocks (product_id, branch_id) 
     SELECT NEW.id, b.id FROM branches b;
 END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `Update modified at product`;
+DELIMITER $$
+CREATE TRIGGER `Update modified at product` BEFORE UPDATE ON `products` FOR EACH ROW SET NEW.modified_at := NOW()
 $$
 DELIMITER ;
 
@@ -297,6 +307,15 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (116, 4, 30, 0, '2020-11-17 23:30:02', '2020-11-17 23:30:02'),
 (117, 1, 30, 0, '2020-11-17 23:30:02', '2020-11-17 23:30:02');
 
+--
+-- Triggers `stocks`
+--
+DROP TRIGGER IF EXISTS `Update modified at stocks`;
+DELIMITER $$
+CREATE TRIGGER `Update modified at stocks` BEFORE UPDATE ON `stocks` FOR EACH ROW SET NEW.modified_at := NOW()
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -388,6 +407,11 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `p
 DROP TRIGGER IF EXISTS `Add default branch`;
 DELIMITER $$
 CREATE TRIGGER `Add default branch` AFTER INSERT ON `users` FOR EACH ROW INSERT INTO assignments (user_id, branch_id) VALUES (NEW.id, 1)
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `Update modified at users`;
+DELIMITER $$
+CREATE TRIGGER `Update modified at users` BEFORE UPDATE ON `users` FOR EACH ROW SET NEW.modified_at := NOW()
 $$
 DELIMITER ;
 
