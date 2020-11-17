@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 17, 2020 at 05:21 PM
+-- Generation Time: Nov 17, 2020 at 05:55 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -28,19 +28,20 @@ DELIMITER $$
 --
 -- Procedures
 --
-DROP PROCEDURE IF EXISTS `Add transaction`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Add transaction` (IN `sid` INT, IN `quantity` INT)  NO SQL
-BEGIN
-	SET @old_quantity = (SELECT quantity FROM stocks where id = sid);
-    SET @diff = quantity - @old_quantity;
-    INSERT INTO transactions (stock_id, quantity) VALUES (sid, @diff);
-END$$
-
 DROP PROCEDURE IF EXISTS `create_branch`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_branch` (IN `user_id` INT, IN `branch_name` VARCHAR(255), IN `branch_address` VARCHAR(255))  NO SQL
 BEGIN
 	INSERT INTO branches (name, address) VALUES (branch_name, branch_address);
     INSERT INTO assignments (assignments.user_id, branch_id) VALUES (user_id, (SELECT LAST_INSERT_ID()));
+END$$
+
+DROP PROCEDURE IF EXISTS `Set stock`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Set stock` (IN `sid` INT, IN `quantity` INT)  NO SQL
+BEGIN
+	SET @old_quantity = (SELECT s.quantity FROM stocks s where s.id = sid);
+    SET @diff = quantity - @old_quantity;
+    INSERT INTO transactions (stock_id, quantity) VALUES (sid, @diff);
+    SELECT @diff,@old_quantity, quantity;
 END$$
 
 DELIMITER ;
@@ -225,7 +226,7 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`, `modified_at`) VALUES
-(1, 1, 1, 0, '2020-11-05 23:50:46', '2020-11-18 00:17:04'),
+(1, 1, 1, 0, '2020-11-05 23:50:46', '2020-11-18 00:54:53'),
 (2, 1, 2, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (3, 1, 3, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
 (4, 1, 4, 0, '2020-11-05 23:50:46', '2020-11-05 23:50:46'),
@@ -337,13 +338,24 @@ CREATE TABLE `transactions` (
 --
 
 --
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `stock_id`, `quantity`, `created_at`) VALUES
+(1, 1, 0, '2020-11-18 00:47:47'),
+(2, 1, 1, '2020-11-18 00:54:13'),
+(3, 1, 2, '2020-11-18 00:54:29'),
+(4, 1, -1, '2020-11-18 00:54:44'),
+(5, 1, -2, '2020-11-18 00:54:53');
+
+--
 -- Triggers `transactions`
 --
 DROP TRIGGER IF EXISTS `Aggregate stock quantity after delete`;
 DELIMITER $$
 CREATE TRIGGER `Aggregate stock quantity after delete` AFTER DELETE ON `transactions` FOR EACH ROW BEGIN
 	UPDATE stocks 
-    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id), 0)
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE stock_id = OLD.stock_id), 0)
     WHERE id = OLD.stock_id;
 END
 $$
@@ -352,7 +364,7 @@ DROP TRIGGER IF EXISTS `Aggregate stock quantity after insert`;
 DELIMITER $$
 CREATE TRIGGER `Aggregate stock quantity after insert` AFTER INSERT ON `transactions` FOR EACH ROW BEGIN
 	UPDATE stocks 
-    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id), 0)
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE stock_id = NEW.stock_id), 0)
     WHERE id = NEW.stock_id;
 END
 $$
@@ -361,11 +373,11 @@ DROP TRIGGER IF EXISTS `Aggregate stock quantity after update`;
 DELIMITER $$
 CREATE TRIGGER `Aggregate stock quantity after update` AFTER UPDATE ON `transactions` FOR EACH ROW BEGIN
 	UPDATE stocks 
-    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = OLD.stock_id), 0)
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE stock_id = OLD.stock_id), 0)
     WHERE id = OLD.stock_id;
     
     UPDATE stocks 
-    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE id = NEW.stock_id), 0)
+    SET quantity = COALESCE((SELECT SUM(quantity) FROM transactions WHERE stock_id = NEW.stock_id), 0)
     WHERE id = NEW.stock_id;
 END
 $$
@@ -374,7 +386,7 @@ DROP TRIGGER IF EXISTS `Check if enough stocks`;
 DELIMITER $$
 CREATE TRIGGER `Check if enough stocks` BEFORE INSERT ON `transactions` FOR EACH ROW BEGIN
 	SELECT s.quantity INTO @stock_quantity FROM stocks s WHERE s.id=NEW.stock_id;
-    IF @stock_quantity - NEW.quantity < 0 THEN
+    IF @stock_quantity + NEW.quantity < 0 THEN
     	SIGNAL SQLSTATE '45000'
           SET MESSAGE_TEXT = 'Cannot decrease more stock than currently available!';
     END IF;
@@ -508,7 +520,7 @@ ALTER TABLE `stocks`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

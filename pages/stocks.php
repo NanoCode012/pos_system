@@ -1,11 +1,7 @@
 <?php
 if (isset($_POST['edit'])) {
-    $db->update(
-        'stocks',
-        [
-            'quantity' => trim($_POST['quantity']),
-        ],
-        ['id' => $_POST['stock-id']]
+    $db->run(
+        'Call `Set stock`(?,?)', $_POST['stock-id'], $_POST['quantity']
     );
 } 
 ?>
