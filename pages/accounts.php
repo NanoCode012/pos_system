@@ -57,7 +57,9 @@ if (isset($_POST['edit'])) {
         );
     }
 }
-echo json_encode($_POST);
+elseif (isset($_POST['delete'])){
+    $db->delete('users', ['id' => $_POST['id']]);
+}
 ?>
 <div class="main-content" id="panel">
     <!-- Topnav -->
@@ -178,7 +180,10 @@ echo json_encode($_POST);
                                                     data-target="#editAccountModal<?php echo $row[
                                                         'id'
                                                     ]; ?>">Edit</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
+                                                    <form role="form" action="" method="post">
+                                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>" >
+                                                        <button name="delete" type="submit" class="dropdown-item">Delete</button>
+                                                    </form>
                                             </div>
                                         </div>
                                     </td>
