@@ -9,7 +9,8 @@
 <script src="assets/js/argon.js?v=1.2.0"></script>
 <!-- Bootstrap Table JS -->
 <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
-
+<!-- Bootstrap Notify -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.3/bootstrap-notify.min.js" integrity="sha512-d0ZsJAyXsXlpeDNAhXj4mbaqpLfdyoOaQFmaFVG/KodZnAaVrdOsO9KiG62V7dcV+sHIFb7VTMmkB5JntAoq+Q==" crossorigin="anonymous"></script>
 </body>
 
 </html>

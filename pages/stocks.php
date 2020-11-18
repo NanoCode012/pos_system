@@ -1,12 +1,23 @@
 <?php
 if (isset($_POST['edit'])) {
-    $db->run(
-        'Call `Set stock`(?,?)', $_POST['stock-id'], $_POST['quantity']
-    );
+    try {
+        $db->run(
+            'Call `Set stock`(?,?)', $_POST['stock-id'], $_POST['quantity']
+        );
+    } catch (PDOException $exception) {
+        $error = $exception->getMessage();
+        $error = ($pos = strpos($error, '1644 '))
+            ? substr($error, $pos + 5)
+            : $error;
+    }
 } 
+
+
 ?>
 <!-- Main Content -->
 <div class="main-content" id="panel">
+    <!-- <div class="alert alert-danger" role="alert">Error
+    </div> -->
     <!-- Topnav -->
     <?php include 'includes/nav-top.php'; ?>
     <!-- Header -->
@@ -130,6 +141,24 @@ if (isset($_POST['edit'])) {
   </div>
 </div>
 <?php } ?>
+
+<?php
+if (isset($error)) {
+    echo "
+        <script>
+        $(function () {
+            $.notify({
+                message: '$error'
+            },
+            {   
+                type: 'danger',
+                newest_on_top: true
+            }
+            )
+        });
+        </script>";
+}
+?>
 
 <script>
 $(function() {
