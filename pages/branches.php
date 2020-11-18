@@ -15,6 +15,13 @@ if (isset($_POST['edit'])) {
         ['id' => $_POST['id']]
     );
 }
+
+if (isset($_POST['delete'])) {
+    $db->delete(
+        'branches',
+        ['id' => $_POST['id']]
+    );
+} 
 ?>
 
 <!-- Main content -->
@@ -82,8 +89,11 @@ if (isset($_POST['edit'])) {
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                 <a class="dropdown-item" data-toggle="modal"
-                                                    data-target="#editBranchModal">Edit branch</a>
-                                                <a class="dropdown-item">Delete branch</a>
+                                                    data-target="#editBranchModal<?php echo $row['id']; ?>">Edit</a>
+                                                    <form role="form" action="" method="post">
+                                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>" >
+                                                        <button name="delete" type="submit" class="dropdown-item">Delete</button>
+                                                    </form>
                                             </div>
                                         </div>
                                     </td>
@@ -138,7 +148,7 @@ if (isset($_POST['edit'])) {
 
 <!-- Modal edit branch -->
 <?php foreach ($rows as $row) { ?>
-<div class="modal fade" id="editBranchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="editBranchModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
