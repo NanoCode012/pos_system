@@ -153,3 +153,8 @@ if (isset($_POST['signup'])) {
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready( function () {
+            window.scroll(0, 100);
+        })
+    </script>

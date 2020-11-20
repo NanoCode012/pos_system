@@ -106,3 +106,8 @@ if (isset($_POST['login'])) {
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready( function () {
+            window.scroll(0, 100);
+        })
+    </script>
