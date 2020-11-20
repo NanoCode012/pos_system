@@ -4,7 +4,7 @@
     <div class="scrollbar-inner">
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
-            <a class="navbar-brand" href="javascript:void(0)">
+            <a class="navbar-brand">
                 <img src="assets/img/brand/chanchanlogo.png" class="navbar-brand-img" alt="...">
             </a>
         </div>
