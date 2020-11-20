@@ -41,7 +41,9 @@
                 <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
               </span>
               <div class="media-body  ml-2  d-none d-lg-block">
-                <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                <span class="mb-0 text-sm  font-weight-bold">
+                    <?php echo $db->cell('SELECT CONCAT(first_name, " ", last_name) FROM users WHERE id = ?', $_SESSION['user_id']); ?>
+                </span>
               </div>
             </div>
           </a>
