@@ -69,11 +69,18 @@ elseif (isset($_POST['delete'])){
         <div class="container-fluid">
             <div class="header-body">
                 <div class="row align-items-center py-4">
-                    <div class="col-lg-6 col-7">
+                    <div class="col">
                         <h6 class="h2 text-white d-inlin e-block mb-0">Accounts</h6>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <div class="col-lg-6 col-i5 text-right branch-filter" style="margin-left:10px;">
+                    <div class="col"></div>
+                        <div class="col text-right" style="margin-left:10px;">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                            data-target="#createBranchModal"
+                            style="height:45px; border-radius:2em; color:#8898aa;">
+                            + New Branch
+                        </button>
+                        </div>
+                        <div class="col text-right branch-filter">
                             <select class="form-control branch-filter" style="margin-left:20px" id="filterPosition">
                                 <option value="ALL"> ALL </option>
                                 <option value="STAFF"> STAFF </option>
@@ -83,7 +90,7 @@ elseif (isset($_POST['delete'])){
                                 <option value="IT"> IT </option>
                             </select>
                         </div>
-                        <div class="col-lg-6 col-5 text-right branch-filter" style="margin-left:10px;">
+                        <div class="col text-right branch-filter">
                             <select class="form-control branch-filter" style="margin-left:20px" id="filterBranch">
                                 <option value="ALL"> ALL </option>
                                 <?php
@@ -96,7 +103,6 @@ elseif (isset($_POST['delete'])){
                                 ?>
                             </select>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
