@@ -2,7 +2,5 @@
 
 session_destroy();
 
-echo 'Logged out!';
+header('Location: ?p=login');
 ?>
-
-<a href='?p=login'>Login</a>
