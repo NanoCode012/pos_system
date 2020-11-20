@@ -143,6 +143,7 @@ if (isset($_POST['signup'])) {
                                     <div class="text-center">
                                         <button type="submit" name="signup" class="btn btn-primary my-4">Sign
                                             up</button>
+                                        <a type="button" href="?p=accounts" class="btn btn-secondary my-4">Back</a>
                                     </div>
                                     <fieldset>
                             </form>

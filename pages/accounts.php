@@ -74,11 +74,10 @@ elseif (isset($_POST['delete'])){
                     </div>
                     <div class="col"></div>
                         <div class="col text-right" style="margin-left:10px;">
-                            <button type="button" class="btn btn-secondary" data-toggle="modal"
-                            data-target="#createBranchModal"
+                            <a type="button" class="btn btn-secondary" href='?p=signup'
                             style="height:45px; border-radius:2em; color:#8898aa;">
-                            + New Branch
-                        </button>
+                            + Create Account
+                            </a>
                         </div>
                         <div class="col text-right branch-filter">
                             <select class="form-control branch-filter" style="margin-left:20px" id="filterPosition">

@@ -2,7 +2,7 @@
 
 // If logged in
 if (isset($_SESSION['user_id'])) {
-    if (!isset($_GET['p']) || in_array($_GET['p'], ['login', 'signup'])) {
+    if (!isset($_GET['p']) || in_array($_GET['p'], ['login'])) {
         $page = 'dashboard';
     } else {
         $page = $_GET['p'];
@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
 else {
     if (
         isset($_GET['p']) &&
-        in_array($_GET['p'], ['login', 'logout', 'signup'])
+        in_array($_GET['p'], ['login', 'logout'])
     ) {
         $page = $_GET['p'];
     } else {
