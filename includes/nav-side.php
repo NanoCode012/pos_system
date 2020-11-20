@@ -12,7 +12,9 @@
             <!-- Collapse -->
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
+                <?php $position = $db->cell('SELECT position FROM users WHERE id = ?', $_SESSION['user_id']) ?>
                 <ul class="navbar-nav nav">
+                    <?php if (in_array($position, array('CEO', 'EXECUTIVE', 'IT'))) { ?>
                     <li class="nav-item nav-tab-margin">
                         <a class="nav-link <?php if ($page === 'dashboard') {
                             echo 'active';
@@ -21,6 +23,8 @@
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
+                    <?php } ?>
+                    <?php if (in_array($position, array('STAFF', 'MANAGER', 'EXECUTIVE', 'IT'))) { ?>
                     <li class="nav-item nav-tab-margin">
                         <a class="nav-link <?php if ($page === 'stocks') {
                             echo 'active';
@@ -29,6 +33,8 @@
                             <span class="nav-link-text">Stocks</span>
                         </a>
                     </li>
+                    <?php } ?>
+                    <?php if (in_array($position, array('MANAGER', 'EXECUTIVE', 'IT'))) { ?>
                     <li class="nav-item nav-tab-margin">
                         <a class="nav-link <?php if ($page === 'products') {
                             echo 'active';
@@ -37,6 +43,8 @@
                             <span class="nav-link-text">Products</span>
                         </a>
                     </li>
+                    <?php } ?>
+                    <?php if (in_array($position, array('CEO', 'IT'))) { ?>
                     <li class="nav-item nav-tab-margin">
                         <a class="nav-link <?php if ($page === 'branches') {
                             echo 'active';
@@ -45,6 +53,8 @@
                             <span class="nav-link-text">Branches</span>
                         </a>
                     </li>
+                    <?php } ?>
+                    <?php if (in_array($position, array('IT'))) { ?>
                     <li class="nav-item nav-tab-margin">
                         <a class="nav-link <?php if ($page === 'accounts') {
                             echo 'active';
@@ -53,6 +63,7 @@
                             <span class="nav-link-text">Accounts</span>
                         </a>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
