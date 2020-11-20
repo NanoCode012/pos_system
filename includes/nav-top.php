@@ -48,10 +48,10 @@
             </div>
           </a>
           <div class="dropdown-menu  dropdown-menu-right ">
-            <!-- <div class="dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Welcome!</h6>
+            <div class="dropdown-header noti-title">
+              <h6 class="text-overflow m-0">POSITION: <?php echo $db->cell('SELECT position FROM users WHERE id = ?', $_SESSION['user_id']); ?></h6>
             </div>
-            <a href="#!" class="dropdown-item">
+            <!-- <a href="#!" class="dropdown-item">
               <i class="ni ni-single-02"></i>
               <span>My profile</span>
             </a>
