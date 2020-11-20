@@ -48,7 +48,7 @@
             </div>
           </a>
           <div class="dropdown-menu  dropdown-menu-right ">
-            <div class="dropdown-header noti-title">
+            <!-- <div class="dropdown-header noti-title">
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
             <a href="#!" class="dropdown-item">
@@ -59,7 +59,7 @@
               <i class="ni ni-settings-gear-65"></i>
               <span>Settings</span>
             </a>
-            <div class="dropdown-divider"></div>
+            <div class="dropdown-divider"></div> -->
             <a href="?p=logout" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
