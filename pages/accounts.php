@@ -391,32 +391,52 @@ $(function() {
     var $selectorPosition = $('#filterPosition');
     var $selectorBranch = $('#filterBranch');
 
-    $.fn.myfunction = function(row, filter) {
+    $.fn.branchFilter = function(row, filter) {
         let match = false;
         filter = filter['branch'].toUpperCase();
         var $options = $(row['branch']).children('option');
         $options.each((index, val) => {
             if ($(val).val().toUpperCase() === filter) {
                 match = true;
+                return false; //breaks out of each loop
             }
         });
         return match;
     };
 
-    $selectorPosition.change(function() {
-        var $position = $(this).children('option:selected').val();
-        if ($position != 'ALL') $table.bootstrapTable('filterBy', {
-            position: $position
-        });
-        else $table.bootstrapTable('filterBy', {});
-    });
+    $.fn.combinedFilter = function(row, filter) {
+        let match = false;
+        match = $.fn.branchFilter(row, filter);
+        if (match) {
+            filter = filter['position'].toUpperCase();
+            match = (row['position'] == filter);
+        }
+        return match;
+    };
 
-    $selectorBranch.change(function() {
-        var $branch = $(this).children('option:selected').val();
-        if ($branch != 'ALL') {
+    $selectorPosition.add($selectorBranch).on('change', ()=> {
+        var $position = $selectorPosition.children('option:selected').val();
+        var $branch = $selectorBranch.children('option:selected').val();
+        if ($position == 'ALL' && $branch == 'ALL') {
             $table.bootstrapTable('refreshOptions', {
                 filterOptions: {
-                    filterAlgorithm: $.fn.myfunction
+                    filterAlgorithm: 'and'
+                }
+            });
+            $table.bootstrapTable('filterBy', {});
+        } else if ($position != 'ALL' && $branch == 'ALL') {
+            $table.bootstrapTable('refreshOptions', {
+                filterOptions: {
+                    filterAlgorithm: 'and'
+                }
+            });
+            $table.bootstrapTable('filterBy', {
+                position: $position
+            });
+        } else if ($position == 'ALL' && $branch != 'ALL') {
+            $table.bootstrapTable('refreshOptions', {
+                filterOptions: {
+                    filterAlgorithm: $.fn.branchFilter
                 }
             });
             $table.bootstrapTable('filterBy', {
@@ -425,10 +445,13 @@ $(function() {
         } else {
             $table.bootstrapTable('refreshOptions', {
                 filterOptions: {
-                    filterAlgorithm: 'and'
+                    filterAlgorithm: $.fn.combinedFilter
                 }
             });
-            $table.bootstrapTable('filterBy', {});
+            $table.bootstrapTable('filterBy', {
+                branch: $branch,
+                position: $position
+            });
         }
     });
 });
