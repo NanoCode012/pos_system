@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 21, 2020 at 07:32 PM
+-- Generation Time: Nov 21, 2020 at 07:45 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -171,7 +171,7 @@ BEGIN
     IF cur > past THEN
         SET percentage = (SELECT ((cur - past)/past)*100 - 1);
     ELSE 
-        SET percentage = (SELECT ((past - cur)/past)*100 - 1);
+        SET percentage = -(SELECT ((past - cur)/past)*100 - 1);
     END IF;
     RETURN percentage;
 END$$
