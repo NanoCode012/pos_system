@@ -906,10 +906,10 @@ var SalesChart = (function() {
               var content = '';
 
               if (data.datasets.length > 1) {
-                content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                content += '' + label + '';
               }
 
-              content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
+              content += '' + yLabel + '';
               return content;
             }
           }
@@ -968,9 +968,9 @@ var RevenueChart = (function() {
                 var yLabel = item.yLabel;
                 var content = '';
                 if (data.datasets.length > 1) {
-                  content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                  content += '' + label + '</span>';
                 }
-                content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
+                content += '' + yLabel + '';
                 return content;
               }
             }
@@ -992,17 +992,20 @@ var RevenueChart = (function() {
   })();
 
 
-//DONUT TOUCH ME!
+////DONUT TOUCH ME!
 var ProductsPieChart = (function() {
     var $chart = $('#chart-pie');
     function init($chart) {
       var productsPieChart = new Chart($chart, {
           type: 'doughnut',
-          options: {cutoutPercentage: 50,
-                   },
+          options: {cutoutPercentage: 50},
           data : {
-            labels: ['Product 1', 'Product 2', 'Product 3'],
-            datasets: [{data: [10, 20, 30]}]
+            labels: ['SNACKS', 'DRINKS', 'ELECTRONICS', 'MEDICAL'],
+            datasets: [{data: [10, 20, 30, 10],
+                       backgroundColor:['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],
+                       hoverBorderColor:['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],
+                       hoverBorderWidth: 10,
+                       hoverBackgroundColor:['#bf435e','#3988bd','#9639c4','#c7961a']}]
           }
       });
         
