@@ -77,7 +77,7 @@ $revenue_time = $db->run('CALL `Get revenue time`(?,?,?,?)', $dict['from-date'],
                                         <!-- <i class="fa fa-arrow-up"></i> -->
                                         <?php if (is_null($dashboard['@total_sales_ratio'])) {echo 'N/A';} else {echo number_format($dashboard['@total_sales_ratio'],2).'%';} ?>
                                     </span>
-                                    <span class="text-nowrap">Since last time period</span>
+                                    <span class="text-nowrap">During this time period</span>
                                 </p>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ $revenue_time = $db->run('CALL `Get revenue time`(?,?,?,?)', $dict['from-date'],
                                     <span class="text-success mr-2">
                                         <?php if (is_null($dashboard['@total_profit_ratio'])) {echo 'N/A';} else {echo number_format($dashboard['@total_profit_ratio'],2). '%';} ?>
                                     </span>
-                                    <span class="text-nowrap">Since last time period</span>
+                                    <span class="text-nowrap">During this time period</span>
                                 </p>
                             </div>
                         </div>
@@ -126,7 +126,7 @@ $revenue_time = $db->run('CALL `Get revenue time`(?,?,?,?)', $dict['from-date'],
                                     <span class="text-success mr-2">
                                         <?php if (is_null($dashboard['@total_transactions_ratio'])) {echo 'N/A';} else {echo number_format($dashboard['@total_transactions_ratio'],2).'%';} ?>    
                                     </span>
-                                    <span class="text-nowrap">Since last time period</span>
+                                    <span class="text-nowrap">During this time period</span>
                                 </p>
                             </div>
                         </div>
@@ -152,7 +152,7 @@ $revenue_time = $db->run('CALL `Get revenue time`(?,?,?,?)', $dict['from-date'],
                                     <span class="text-success mr-2">
                                         <?php if (is_null($dashboard['@best_selling_prev'])) {echo 'N/A';} else {echo $dashboard['@best_selling_prev'];} ?>    
                                     </span>
-                                    <span class="text-nowrap">Since last time period</span>
+                                    <span class="text-nowrap">During this time period</span>
                                 </p>
                             </div>
                         </div>
