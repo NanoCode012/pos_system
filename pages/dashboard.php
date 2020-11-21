@@ -21,11 +21,11 @@ if (isset($_POST['save'])) {
     }
 }
 
-$dashboard = $db->row('CALL `Get dashboard`(?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency']);
-$sales_category = $db->run('CALL `Get sales per category`(?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency']);
-$transactions_time = $db->run('CALL `Get transactions time`(?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency']);
-$sales_time = $db->run('CALL `Get sales time`(?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency']);
-$revenue_time = $db->run('CALL `Get revenue time`(?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency']);
+$dashboard = $db->row('CALL `Get dashboard`(?,?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency'], $_SESSION['user_id']);
+$sales_category = $db->run('CALL `Get sales per category`(?,?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency'], $_SESSION['user_id']);
+$transactions_time = $db->run('CALL `Get transactions time`(?,?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency'], $_SESSION['user_id']);
+$sales_time = $db->run('CALL `Get sales time`(?,?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency'], $_SESSION['user_id']);
+$revenue_time = $db->run('CALL `Get revenue time`(?,?,?,?)', $dict['from-date'], $dict['to-date'], $dict['frequency'], $_SESSION['user_id']);
 // date("Y-m-d H:i:s", strtotime($_POST["datentime"]))
 
 ?>
@@ -75,7 +75,7 @@ $revenue_time = $db->run('CALL `Get revenue time`(?,?,?)', $dict['from-date'], $
                                 <p class="mt-3 mb-0 text-sm">
                                     <span class="text-success mr-2">
                                         <!-- <i class="fa fa-arrow-up"></i> -->
-                                        <?php if (is_null($dashboard['@total_sales_ratio'])) {echo 'N/A';} else {echo $dashboard['@total_sales_ratio'].'%';} ?>
+                                        <?php if (is_null($dashboard['@total_sales_ratio'])) {echo 'N/A';} else {echo number_format($dashboard['@total_sales_ratio'],2).'%';} ?>
                                     </span>
                                     <span class="text-nowrap">Since last time period</span>
                                 </p>
@@ -100,7 +100,7 @@ $revenue_time = $db->run('CALL `Get revenue time`(?,?,?)', $dict['from-date'], $
                                 </div>
                                 <p class="mt-3 mb-0 text-sm">
                                     <span class="text-success mr-2">
-                                        <?php if (is_null($dashboard['@total_profit_ratio'])) {echo 'N/A';} else {echo $dashboard['@total_profit_ratio']. '%';} ?>
+                                        <?php if (is_null($dashboard['@total_profit_ratio'])) {echo 'N/A';} else {echo number_format($dashboard['@total_profit_ratio'],2). '%';} ?>
                                     </span>
                                     <span class="text-nowrap">Since last time period</span>
                                 </p>
@@ -124,7 +124,7 @@ $revenue_time = $db->run('CALL `Get revenue time`(?,?,?)', $dict['from-date'], $
                                 </div>
                                 <p class="mt-3 mb-0 text-sm">
                                     <span class="text-success mr-2">
-                                        <?php if (is_null($dashboard['@total_transactions_ratio'])) {echo 'N/A';} else {echo $dashboard['@total_transactions_ratio'].'%';} ?>    
+                                        <?php if (is_null($dashboard['@total_transactions_ratio'])) {echo 'N/A';} else {echo number_format($dashboard['@total_transactions_ratio'],2).'%';} ?>    
                                     </span>
                                     <span class="text-nowrap">Since last time period</span>
                                 </p>

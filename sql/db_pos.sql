@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 21, 2020 at 06:54 PM
+-- Generation Time: Nov 21, 2020 at 07:32 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -36,7 +36,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `Get dashboard`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Get dashboard` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Get dashboard` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255), IN `user_id` INT)  NO SQL
 BEGIN
 	SET @start_date = start_date;
     SET @end_date = end_date;
@@ -45,64 +45,64 @@ BEGIN
     
     #SELECT @start_date, @end_date, @past_start_date, @past_end_date, @freq_t;
     
-	SELECT `get_total_sales`(@start_date, @end_date) INTO @total_sales;
-    SELECT `get_total_sales`(@past_start_date, @past_end_date) INTO @total_sales_prev;
+	SELECT `get_total_sales`(@start_date, @end_date, user_id) INTO @total_sales;
+    SELECT `get_total_sales`(@past_start_date, @past_end_date, user_id) INTO @total_sales_prev;
     SELECT `get_ratio`(@total_sales, @total_sales_prev) INTO @total_sales_ratio;
     
-    SELECT `get_total_profit`(@start_date, @end_date) INTO @total_profit;
-    SELECT `get_total_profit`(@past_start_date, @past_end_date) INTO @total_profit_prev;
+    SELECT `get_total_profit`(@start_date, @end_date, user_id) INTO @total_profit;
+    SELECT `get_total_profit`(@past_start_date, @past_end_date, user_id) INTO @total_profit_prev;
     SELECT `get_ratio`(@total_profit, @total_profit_prev) INTO @total_profit_ratio;
     
-    SELECT `get_total_transactions`(@start_date, @end_date) INTO @total_transactions;
-    SELECT `get_total_transactions`(@past_start_date, @past_end_date) INTO @total_transactions_prev;
+    SELECT `get_total_transactions`(@start_date, @end_date, user_id) INTO @total_transactions;
+    SELECT `get_total_transactions`(@past_start_date, @past_end_date, user_id) INTO @total_transactions_prev;
     SELECT `get_ratio`(@total_transactions, @total_transactions_prev) INTO @total_transactions_ratio;
     
-    SELECT `get_best_selling`(@start_date, @end_date) INTO @best_selling;
-    SELECT `get_best_selling`(@past_start_date, @past_end_date) INTO @best_selling_prev;
+    SELECT `get_best_selling`(@start_date, @end_date, user_id) INTO @best_selling;
+    SELECT `get_best_selling`(@past_start_date, @past_end_date, user_id) INTO @best_selling_prev;
 
     
     SELECT @total_sales, @total_profit, @total_transactions, @best_selling, @total_sales_ratio, @total_profit_ratio, @total_transactions_ratio, @best_selling_prev;
 END$$
 
 DROP PROCEDURE IF EXISTS `Get revenue time`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Get revenue time` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Get revenue time` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255), IN `user_id` INT)  NO SQL
 BEGIN
 	SET @start_date = start_date;
     SET @end_date = end_date;
 	CALL `get_dates_range`(@start_date, @end_date, frequency, @freq_t);
     
     SELECT date, SUM(profit_per_prod) AS revenue FROM (
-    SELECT DATE(t.created_at) AS date, p.id, SUM(-1*t.quantity) AS num_sold, (p.sell_price-p.buy_price) AS profit_per_stock, SUM(-1*t.quantity)*(p.sell_price-p.buy_price) AS profit_per_prod FROM transactions t, stocks s, products p WHERE t.created_at BETWEEN @start_date AND @end_date AND t.quantity < 0 AND t.stock_id = s.id AND s.product_id = p.id GROUP BY DATE(t.created_at), p.id) AS prof GROUP BY date;
+    SELECT DATE(t.created_at) AS date, p.id, SUM(-1*t.quantity) AS num_sold, (p.sell_price-p.buy_price) AS profit_per_stock, SUM(-1*t.quantity)*(p.sell_price-p.buy_price) AS profit_per_prod FROM transactions t, stocks s, products p WHERE t.created_at BETWEEN @start_date AND @end_date AND t.quantity < 0 AND t.stock_id = s.id AND s.product_id = p.id AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id) GROUP BY DATE(t.created_at), p.id) AS prof GROUP BY date;
 END$$
 
 DROP PROCEDURE IF EXISTS `Get sales per category`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Get sales per category` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Get sales per category` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255), IN `user_id` INT)  NO SQL
 BEGIN
 	SET @start_date = start_date;
     SET @end_date = end_date;
 	CALL `get_dates_range`(@start_date, @end_date, frequency, @freq_t);
     
-    SELECT p.category, SUM(t.quantity*(-1)) AS quantity FROM transactions t,  products p, stocks s WHERE t.quantity < 0 AND t.stock_id = s.id AND s.product_id = p.id AND t.created_at BETWEEN @start_date AND @end_date GROUP BY p.category;
+    SELECT p.category, SUM(t.quantity*(-1)) AS quantity FROM transactions t,  products p, stocks s WHERE t.quantity < 0 AND t.stock_id = s.id AND s.product_id = p.id AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id) AND t.created_at BETWEEN @start_date AND @end_date GROUP BY p.category;
 END$$
 
 DROP PROCEDURE IF EXISTS `Get sales time`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Get sales time` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Get sales time` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255), IN `user_id` INT)  NO SQL
 BEGIN
 	SET @start_date = start_date;
     SET @end_date = end_date;
 	CALL `get_dates_range`(@start_date, @end_date, frequency, @freq_t);
     
-    SELECT DATE(t.created_at) AS date, SUM(t.quantity*(-1)) AS num_sales FROM transactions t WHERE t.created_at BETWEEN @start_date AND @end_date AND t.quantity < 0 GROUP BY DATE(t.created_at);
+    SELECT DATE(t.created_at) AS date, SUM(t.quantity*(-1)) AS num_sales FROM transactions t, stocks s WHERE t.created_at BETWEEN @start_date AND @end_date AND t.quantity < 0 AND t.stock_id = s.id AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id) GROUP BY DATE(t.created_at);
 END$$
 
 DROP PROCEDURE IF EXISTS `Get transactions time`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Get transactions time` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Get transactions time` (IN `start_date` DATE, IN `end_date` DATE, IN `frequency` VARCHAR(255), IN `user_id` INT)  NO SQL
 BEGIN
 	SET @start_date = start_date;
     SET @end_date = end_date;
 	CALL `get_dates_range`(@start_date, @end_date, frequency, @freq_t);
     
-    SELECT DATE(t.created_at) AS date, COUNT(*) AS num_transactions FROM transactions t WHERE t.created_at BETWEEN @start_date AND @end_date AND t.quantity < 0 GROUP BY DATE(t.created_at);
+    SELECT DATE(t.created_at) AS date, COUNT(*) AS num_transactions FROM transactions t, stocks s WHERE t.created_at BETWEEN @start_date AND @end_date AND t.quantity < 0 AND t.stock_id = s.id AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id) GROUP BY DATE(t.created_at);
 END$$
 
 DROP PROCEDURE IF EXISTS `get_dates_range`$$
@@ -148,11 +148,11 @@ END$$
 -- Functions
 --
 DROP FUNCTION IF EXISTS `get_best_selling`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `get_best_selling` (`start` DATE, `end` DATE) RETURNS VARCHAR(255) CHARSET utf8 NO SQL
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_best_selling` (`start` DATE, `end` DATE, `user_id` INT) RETURNS VARCHAR(255) CHARSET utf8 NO SQL
 BEGIN
 	DECLARE best_sell VARCHAR(255);
 	SELECT name INTO best_sell FROM (
-    SELECT p.name, SUM(-1*t.quantity) AS num_sold FROM transactions t, stocks s, products p WHERE t.created_at BETWEEN start AND end AND t.quantity < 0 AND t.stock_id = s.id AND s.product_id = p.id GROUP BY p.name) AS sold ORDER BY num_sold DESC LIMIT 1;
+    SELECT p.name, SUM(-1*t.quantity) AS num_sold FROM transactions t, stocks s, products p WHERE t.created_at BETWEEN start AND end AND t.quantity < 0 AND t.stock_id = s.id AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id) AND s.product_id = p.id GROUP BY p.name) AS sold ORDER BY num_sold DESC LIMIT 1;
     RETURN best_sell;
 END$$
 
@@ -177,27 +177,29 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `get_total_profit`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `get_total_profit` (`start` DATE, `end` DATE) RETURNS FLOAT NO SQL
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_total_profit` (`start` DATE, `end` DATE, `user_id` INT) RETURNS FLOAT NO SQL
 BEGIN
 	DECLARE profit FLOAT;
     SELECT SUM(profit_per_prod) INTO profit FROM (
-    SELECT p.id, SUM(-1*t.quantity) AS num_sold, (p.sell_price-p.buy_price) AS profit_per_stock, SUM(-1*t.quantity)*(p.sell_price-p.buy_price) AS profit_per_prod FROM transactions t, stocks s, products p WHERE t.created_at BETWEEN start AND end AND t.quantity < 0 AND t.stock_id = s.id AND s.product_id = p.id GROUP BY p.id) AS prof;
+    SELECT p.id, SUM(-1*t.quantity) AS num_sold, (p.sell_price-p.buy_price) AS profit_per_stock, SUM(-1*t.quantity)*(p.sell_price-p.buy_price) AS profit_per_prod FROM transactions t, stocks s, products p WHERE t.created_at BETWEEN start AND end AND t.quantity < 0 AND t.stock_id = s.id AND s.product_id = p.id AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id) GROUP BY p.id) AS prof;
     RETURN profit;
 END$$
 
 DROP FUNCTION IF EXISTS `get_total_sales`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `get_total_sales` (`start` DATE, `end` DATE) RETURNS INT(11) NO SQL
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_total_sales` (`start` DATE, `end` DATE, `user_id` INT) RETURNS INT(11) NO SQL
 BEGIN
 	DECLARE sales INT;
-    SELECT SUM(-1*quantity) INTO sales FROM transactions WHERE created_at BETWEEN start AND end AND quantity < 0;
+    SELECT SUM(-1*t.quantity) INTO sales FROM transactions t, stocks s WHERE t.created_at BETWEEN start AND end AND t.quantity < 0 AND t.stock_id = s.id 
+AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id);
     RETURN sales;
 END$$
 
 DROP FUNCTION IF EXISTS `get_total_transactions`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `get_total_transactions` (`start` DATE, `end` DATE) RETURNS INT(11) NO SQL
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_total_transactions` (`start` DATE, `end` DATE, `user_id` INT) RETURNS INT(11) NO SQL
 BEGIN
 	DECLARE transactions INT;
-    SELECT COUNT(*) INTO transactions FROM transactions WHERE created_at BETWEEN start AND end AND quantity < 0;
+    SELECT COUNT(*) INTO transactions FROM transactions t, stocks s WHERE t.created_at BETWEEN start AND end AND t.quantity < 0 AND t.stock_id = s.id 
+AND s.branch_id IN (SELECT branch_id FROM assignments a WHERE a.user_id = user_id);
     RETURN transactions;
 END$$
 
@@ -333,7 +335,8 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `category`, `sell_price`, `buy_price`, `created_at`, `modified_at`) VALUES
 (3, 'Apple Juice', 'DRINKS', 5, 3, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (4, 'Hotdog', 'SNACKS', 8, 5, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
-(5, 'Icecream', 'SNACKS', 60, 30, '2020-11-20 12:09:57', '2020-11-20 12:09:57');
+(5, 'Icecream', 'SNACKS', 60, 30, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
+(6, 'Airplane', 'ELECTRONICS', 34, 23, '2020-11-22 02:26:11', '2020-11-22 02:26:11');
 
 --
 -- Triggers `products`
@@ -382,7 +385,7 @@ CREATE TABLE `stocks` (
 
 INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`, `modified_at`) VALUES
 (58, 3, 1, 0, '2020-11-07 21:16:14', '2020-11-21 22:00:37'),
-(59, 3, 2, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(59, 3, 2, 4, '2020-11-07 21:16:14', '2020-11-22 02:14:28'),
 (60, 3, 3, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (61, 3, 4, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (62, 3, 5, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
@@ -458,7 +461,33 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (138, 5, 23, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
 (139, 5, 24, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
 (140, 5, 25, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
-(141, 5, 26, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57');
+(141, 5, 26, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
+(142, 6, 1, 4, '2020-11-22 02:26:11', '2020-11-22 02:26:31'),
+(143, 6, 2, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(144, 6, 3, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(145, 6, 4, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(146, 6, 5, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(147, 6, 6, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(148, 6, 7, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(149, 6, 8, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(150, 6, 9, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(151, 6, 10, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(152, 6, 11, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(153, 6, 12, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(154, 6, 13, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(155, 6, 14, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(156, 6, 15, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(157, 6, 16, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(158, 6, 17, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(159, 6, 18, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(160, 6, 19, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(161, 6, 20, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(162, 6, 21, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(163, 6, 22, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(164, 6, 23, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(165, 6, 24, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(166, 6, 25, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(167, 6, 26, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11');
 
 --
 -- Triggers `stocks`
@@ -503,7 +532,11 @@ INSERT INTO `transactions` (`id`, `stock_id`, `quantity`, `created_at`) VALUES
 (13, 89, -4, '2020-11-21 22:08:30'),
 (14, 115, 25, '2020-11-19 23:30:52'),
 (15, 115, -10, '2020-11-20 16:30:52'),
-(16, 65, -2, '2020-11-22 01:53:43');
+(16, 65, -2, '2020-11-22 01:53:43'),
+(17, 59, 17, '2020-11-22 02:14:28'),
+(18, 59, -13, '2020-11-22 02:14:28'),
+(19, 142, 10, '2020-11-22 02:26:24'),
+(20, 142, -6, '2020-11-22 02:26:31');
 
 --
 -- Triggers `transactions`
@@ -664,19 +697,19 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
