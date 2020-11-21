@@ -12,7 +12,7 @@
             <!-- Collapse -->
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
-                <?php $position = $db->cell('SELECT position FROM users WHERE id = ?', $_SESSION['user_id']) ?>
+                <?php $position = $db->cell('SELECT position FROM users WHERE id = ?', $_SESSION['user_id']); ?>
                 <ul class="navbar-nav nav">
                     <?php if (in_array($position, array('CEO', 'EXECUTIVE', 'IT'))) { ?>
                     <li class="nav-item nav-tab-margin">
