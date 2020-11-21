@@ -940,17 +940,9 @@ var SalesChart = (function() {
 })();
 
 var RevenueChart = (function() {
-
-    // Variables
-  
     var $chart = $('#chart-revenue-dark');
-  
-  
-    // Methods
-  
     function init($chart) {
-  
-      var RevenueChart = new Chart($chart, {
+      var revenueChart = new Chart($chart, {
         type: 'line',
         options: {
           scales: {
@@ -975,11 +967,9 @@ var RevenueChart = (function() {
                 var label = data.datasets[item.datasetIndex].label || '';
                 var yLabel = item.yLabel;
                 var content = '';
-  
                 if (data.datasets.length > 1) {
                   content += '<span class="popover-body-label mr-auto">' + label + '</span>';
                 }
-  
                 content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
                 return content;
               }
@@ -990,25 +980,38 @@ var RevenueChart = (function() {
           labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           datasets: [{
             label: 'Performance',
-            data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+            data: [40, 20, 10, 30, 15, 40, 20, 60, 60]
           }]
         }
       });
-  
-      // Save to jQuery object
-  
-      $chart.data('chart', RevenueChart);
-  
+      $chart.data('chart', revenueChart);
     };
-  
-  
-    // Events
-  
     if ($chart.length) {
       init($chart);
     }
-  
   })();
+
+
+//DONUT TOUCH ME!
+var ProductsPieChart = (function() {
+    var $chart = $('#chart-pie');
+    function init($chart) {
+      var productsPieChart = new Chart($chart, {
+          type: 'doughnut',
+          options: {cutoutPercentage: 50,
+                   },
+          data : {
+            labels: ['Product 1', 'Product 2', 'Product 3'],
+            datasets: [{data: [10, 20, 30]}]
+          }
+      });
+        
+      $chart.data('chart', productsPieChart);
+    };
+    init($chart);
+  })();
+
+
 
 //
 // Bootstrap Datepicker
