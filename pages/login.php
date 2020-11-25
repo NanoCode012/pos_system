@@ -31,7 +31,7 @@ if (isset($_POST['login'])) {
                 session_destroy();
                 session_start();
                 $_SESSION['user_id'] = $id;
-                header('Location: ?p=dashboard');
+                header('Location: index.php');
             } else {
                 echo 'Login error';
             }
