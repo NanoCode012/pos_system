@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 21, 2020 at 07:45 PM
+-- Generation Time: Nov 25, 2020 at 04:31 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -235,9 +235,25 @@ INSERT INTO `assignments` (`id`, `user_id`, `branch_id`) VALUES
 (12, 2, 3),
 (13, 2, 4),
 (14, 2, 6),
-(18, 1, 1),
-(19, 1, 8),
-(20, 1, 10);
+(21, 4, 1),
+(22, 1, 1),
+(23, 1, 2),
+(24, 1, 3),
+(25, 1, 4),
+(26, 1, 5),
+(27, 1, 6),
+(28, 1, 7),
+(29, 1, 8),
+(30, 1, 9),
+(31, 1, 10),
+(32, 1, 11),
+(33, 1, 12),
+(34, 1, 13),
+(35, 1, 14),
+(36, 1, 15),
+(37, 1, 16),
+(38, 1, 17),
+(39, 1, 18);
 
 -- --------------------------------------------------------
 
@@ -391,9 +407,9 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (62, 3, 5, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (63, 3, 6, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (64, 3, 7, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
-(65, 3, 8, 16, '2020-11-07 21:16:14', '2020-11-22 01:53:43'),
+(65, 3, 8, 10, '2020-11-07 21:16:14', '2020-11-25 23:06:20'),
 (66, 3, 9, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
-(67, 3, 10, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
+(67, 3, 10, 4, '2020-11-07 21:16:14', '2020-11-22 23:12:47'),
 (68, 3, 11, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (69, 3, 12, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (70, 3, 13, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
@@ -410,7 +426,7 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (81, 3, 24, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (82, 3, 25, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
 (83, 3, 26, 0, '2020-11-07 21:16:14', '2020-11-07 21:16:14'),
-(89, 4, 1, 16, '2020-11-07 23:11:36', '2020-11-21 22:08:30'),
+(89, 4, 1, 14, '2020-11-07 23:11:36', '2020-11-25 23:06:26'),
 (90, 4, 2, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
 (91, 4, 3, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
 (92, 4, 4, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
@@ -438,7 +454,7 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (114, 4, 26, 0, '2020-11-07 23:11:36', '2020-11-07 23:11:36'),
 (115, 5, 1, 15, '2020-11-20 12:09:57', '2020-11-22 00:23:17'),
 (117, 5, 2, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
-(118, 5, 3, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
+(118, 5, 3, 1, '2020-11-20 12:09:57', '2020-11-25 23:17:21'),
 (119, 5, 4, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
 (120, 5, 5, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
 (121, 5, 6, 0, '2020-11-20 12:09:57', '2020-11-20 12:09:57'),
@@ -469,7 +485,7 @@ INSERT INTO `stocks` (`id`, `product_id`, `branch_id`, `quantity`, `created_at`,
 (146, 6, 5, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
 (147, 6, 6, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
 (148, 6, 7, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
-(149, 6, 8, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
+(149, 6, 8, 4, '2020-11-22 02:26:11', '2020-11-22 23:12:33'),
 (150, 6, 9, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
 (151, 6, 10, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
 (152, 6, 11, 0, '2020-11-22 02:26:11', '2020-11-22 02:26:11'),
@@ -536,7 +552,15 @@ INSERT INTO `transactions` (`id`, `stock_id`, `quantity`, `created_at`) VALUES
 (17, 59, 17, '2020-11-22 02:14:28'),
 (18, 59, -13, '2020-11-22 02:14:28'),
 (19, 142, 10, '2020-11-22 02:26:24'),
-(20, 142, -6, '2020-11-22 02:26:31');
+(20, 142, -6, '2020-11-22 02:26:31'),
+(21, 149, 7, '2020-11-22 23:12:26'),
+(22, 149, -3, '2020-11-22 23:12:33'),
+(23, 65, -3, '2020-11-22 23:12:41'),
+(24, 67, 4, '2020-11-22 23:12:47'),
+(25, 65, -3, '2020-11-25 23:06:20'),
+(26, 89, -2, '2020-11-25 23:06:26'),
+(27, 118, 5, '2020-11-25 23:17:12'),
+(28, 118, -4, '2020-11-25 23:17:21');
 
 --
 -- Triggers `transactions`
@@ -611,9 +635,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `position`, `created_at`, `modified_at`) VALUES
-(1, 'test', 'test', 'a', '$2y$10$Rftr4xlRfvblhUJG/LE7MOPvHEaYZhfI0/lqSumpRXO88BztkByV6', 'IT', '2020-11-04 01:09:32', '2020-11-20 12:10:45'),
-(2, 'aba', 'transform', 'b', '$2y$10$ycH4/zhkNOsYDcHz4bxH0eiXg2zP2/bvVMFPe.i2v3VLEvpYRmL/m', 'EXECUTIVE', '2020-11-04 01:14:19', '2020-11-20 11:19:09'),
-(3, 'Frederico', 'Kami-sama', 'c', '$2y$10$kR5MUsWDnnit/lJG3oFCB.AoBeU.cbQ0YfWD8AmX/3aIdR0QfGCyS', 'MANAGER', '2020-11-05 23:23:42', '2020-11-05 23:23:42');
+(1, 'The', 'Administrator', 'a', '$2y$10$Rftr4xlRfvblhUJG/LE7MOPvHEaYZhfI0/lqSumpRXO88BztkByV6', 'IT', '2020-11-04 01:09:32', '2020-11-25 23:15:26'),
+(2, 'Telenoe', 'Triscus', 'b', '$2y$10$ycH4/zhkNOsYDcHz4bxH0eiXg2zP2/bvVMFPe.i2v3VLEvpYRmL/m', 'EXECUTIVE', '2020-11-04 01:14:19', '2020-11-25 23:12:34'),
+(3, 'Frederico', 'Kami-sama', 'c', '$2y$10$kR5MUsWDnnit/lJG3oFCB.AoBeU.cbQ0YfWD8AmX/3aIdR0QfGCyS', 'MANAGER', '2020-11-05 23:23:42', '2020-11-05 23:23:42'),
+(4, 'Lonely', 'Joe', 'd', '$2y$10$Jbai9.s4dt5Eynd7f6ZyqOMEiVbf/u6rOFisD2sOIQYHv01Tecz1C', 'STAFF', '2020-11-25 23:11:57', '2020-11-25 23:11:57');
 
 --
 -- Triggers `users`
@@ -685,7 +710,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `branches`
@@ -703,19 +728,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
