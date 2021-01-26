@@ -1,8 +1,14 @@
 <?php
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'root';
-$accdb = 'db_pos';
+$filename = dirname(__FILE__, 4).'/secret/possystem-dbconfig.php';
+
+if (file_exists($filename)) {
+    require_once $filename;
+} else {
+    $dbhost = 'localhost';
+    $dbuser = 'root';
+    $dbpass = 'root';
+    $dbname = 'db_pos';
+}
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -10,7 +16,7 @@ error_reporting(E_ALL);
 
 try {
     $db = \ParagonIE\EasyDB\Factory::fromArray([
-        'mysql:host=' . $dbhost . ';dbname=' . $accdb,
+        'mysql:host=' . $dbhost . ';dbname=' . $dbname,
         $dbuser,
         $dbpass,
     ]);
